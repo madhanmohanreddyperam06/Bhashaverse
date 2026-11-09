@@ -20,10 +20,10 @@ from components.sidebar import render_sidebar
 # Initialize database
 init_db(seed_defaults=True)
 
-# Render sidebar with dark mode toggle and navigation
+# Render sidebar navigation and settings
 sidebar_settings = render_sidebar(is_chatbot_page=True)
 
-# Load theme CSS (Light / Dark)
+# Load permanent dark theme CSS
 load_css()
 
 # Heading Only
