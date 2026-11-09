@@ -1,7 +1,7 @@
 """
 Bhashaverse - Sidebar Component
 Permanent Dark Theme.
-Renders sidebar brand identity, navigation links, chatbot settings, and live stats.
+Renders brand identity at the top of the sidebar, followed by navigation, chatbot settings, and live stats.
 """
 
 from typing import Dict, Any, Optional
@@ -13,6 +13,7 @@ from database import get_statistics
 def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
     """
     Render permanent dark-themed sidebar across all Streamlit pages.
+    Title is positioned at the top of the sidebar.
     Returns chatbot settings if on the chatbot page.
     """
     chatbot_settings: Dict[str, Any] = {
@@ -22,18 +23,28 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
     }
 
     with st.sidebar:
-        # Brand logo & title
+        # Title at the very top of sidebar
         st.markdown(
             f"""
-            <div style="padding: 0.25rem 0 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 0.75rem;">
-                <h2 style="color: #FAFAFA; margin: 0; font-size: 1.35rem; font-weight: 700;">📜 {APP_NAME}</h2>
-                <div style="color: #FF4B4B; font-size: 0.78rem; font-weight: 600; margin-top: 0.2rem; font-style: italic;">
+            <div style="padding: 0.25rem 0 0.6rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 0.75rem;">
+                <h2 style="color: #FAFAFA; margin: 0; font-size: 1.4rem; font-weight: 700;">📜 {APP_NAME}</h2>
+                <div style="color: #FF4B4B; font-size: 0.8rem; font-weight: 600; margin-top: 0.25rem; font-style: italic;">
                     "{APP_TAGLINE}"
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
+
+        # Page Navigation Links below Title
+        st.page_link("app.py", label="Home (Chatbot)", icon="🤖")
+        st.page_link("pages/1_Explore_Proverbs.py", label="Explore Proverbs", icon="🔍")
+        st.page_link("pages/2_Add_Proverb.py", label="Add Proverb", icon="✍️")
+        st.page_link("pages/3_Dashboard.py", label="Dashboard & Export", icon="📊")
+        st.page_link("pages/4_Moderation.py", label="Moderation", icon="🛡️")
+        st.page_link("pages/5_About.py", label="About", icon="ℹ️")
+
+        st.divider()
 
         # Chatbot Controls (when on home/chatbot page)
         if is_chatbot_page:
