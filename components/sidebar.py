@@ -6,8 +6,7 @@ Renders brand identity at the top of the sidebar, followed by navigation, chatbo
 
 from typing import Dict, Any, Optional
 import streamlit as st
-from config import APP_NAME, APP_TAGLINE, SUPPORTED_LANGUAGES, LANGUAGE_NAMES
-from database import get_statistics
+from config import APP_NAME, APP_TAGLINE, LANGUAGE_NAMES
 
 
 def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
@@ -37,12 +36,12 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
         )
 
         # Page Navigation Links below Title
-        st.page_link("app.py", label="Home (Chatbot)", icon="🤖")
-        st.page_link("pages/1_Explore_Proverbs.py", label="Explore Proverbs", icon="🔍")
-        st.page_link("pages/2_Add_Proverb.py", label="Add Proverb", icon="✍️")
-        st.page_link("pages/3_Dashboard.py", label="Dashboard & Export", icon="📊")
-        st.page_link("pages/4_Moderation.py", label="Moderation", icon="🛡️")
-        st.page_link("pages/5_About.py", label="About", icon="ℹ️")
+        st.page_link("app.py", label="Home")
+        st.page_link("pages/1_Explore_Proverbs.py", label="Explore Proverbs")
+        st.page_link("pages/2_Add_Proverb.py", label="Add Proverb")
+        st.page_link("pages/3_Dashboard.py", label="Dashboard & Export")
+        st.page_link("pages/4_Moderation.py", label="Moderation")
+        st.page_link("pages/5_About.py", label="About")
 
         st.divider()
 
@@ -87,33 +86,5 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
             if st.button("🧹 Clear Conversation", use_container_width=True, key="sidebar_clear_chat"):
                 st.session_state["chat_messages"] = []
                 st.rerun()
-
-            st.divider()
-
-        # Quick Live Stats
-        try:
-            stats = get_statistics()
-            approved = stats.get('approved_proverbs', stats.get('approved_count', 0))
-            active_langs = stats.get('active_languages', stats.get('active_languages_count', 0))
-            contributors = stats.get('unique_contributors', stats.get('total_contributors', 0))
-            st.markdown(
-                f"""
-                <div style="background: #161B22; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.75rem; font-size: 0.82rem; color: #FAFAFA;">
-                    <div>📚 <strong>Approved:</strong> {approved:,}</div>
-                    <div>🗣️ <strong>Languages:</strong> {active_langs} / 10</div>
-                    <div>👥 <strong>Contributors:</strong> {contributors:,}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-        except Exception:
-            pass
-
-        # Language Badges
-        langs_html = " ".join([
-            f"<span style='display: inline-block; background: #161B22; border: 1px solid rgba(255, 255, 255, 0.12); color: #FAFAFA; padding: 2px 6px; border-radius: 4px; font-size: 0.72rem; margin: 2px;'>{lang['name']} ({lang['native_name']})</span>"
-            for lang in SUPPORTED_LANGUAGES
-        ])
-        st.markdown(f"<div style='margin-bottom: 0.5rem;'>{langs_html}</div>", unsafe_allow_html=True)
 
     return chatbot_settings
