@@ -26,12 +26,12 @@ sidebar_settings = render_sidebar(is_chatbot_page=True)
 # Load permanent dark theme CSS
 load_css()
 
-# Heading Only
+# Heading Only (Left-aligned in desktop view)
 st.markdown(
     f"""
-    <div class="bv-landing-hero">
-        <h1 class="bv-landing-title">{APP_NAME}</h1>
-        <p class="bv-landing-tagline">"{APP_TAGLINE}"</p>
+    <div class="bv-landing-hero" style="text-align: left;">
+        <h1 class="bv-landing-title" style="text-align: left;">{APP_NAME}</h1>
+        <p class="bv-landing-tagline" style="text-align: left;">"{APP_TAGLINE}"</p>
     </div>
     """,
     unsafe_allow_html=True
