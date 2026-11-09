@@ -15,7 +15,7 @@ DEFAULT_DB_PATH = DATA_DIR / "bhashaverse.db"
 
 # Application Metadata
 APP_NAME = "Bhashaverse"
-APP_TAGLINE = "Preserve India's Cultural Wisdom - One Proverb at a time"
+APP_TAGLINE = "Preserving Languages. Connecting Cultures. Empowering AI."
 APP_MISSION = (
     "A community-driven multilingual platform designed to collect, preserve, "
     "organize, and explore traditional Indian proverbs, folk sayings, idioms, "
