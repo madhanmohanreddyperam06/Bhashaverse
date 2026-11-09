@@ -39,7 +39,6 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
         st.page_link("app.py", label="Home")
         st.page_link("pages/1_Explore_Proverbs.py", label="Explore Proverbs")
         st.page_link("pages/2_Add_Proverb.py", label="Add Proverb")
-        st.page_link("pages/3_Dashboard.py", label="Dashboard & Export")
         st.page_link("pages/4_Moderation.py", label="Moderation")
         st.page_link("pages/5_About.py", label="About")
 
