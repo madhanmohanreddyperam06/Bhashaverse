@@ -41,6 +41,10 @@ st.markdown(
 if "chat_messages" not in st.session_state:
     st.session_state["chat_messages"] = []
 
+# Clear any legacy assistant greeting if present
+if len(st.session_state.get("chat_messages", [])) == 1 and st.session_state["chat_messages"][0].get("role") == "assistant":
+    st.session_state["chat_messages"] = []
+
 # Render conversation history (only visible when user submits queries)
 for msg in st.session_state["chat_messages"]:
     avatar = "👤" if msg["role"] == "user" else "📜"
