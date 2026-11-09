@@ -1,0 +1,29 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Streamlit local state
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# SQLite databases (exclude local production db from git if sensitive or generated at runtime)
+data/*.db
+data/*.db-wal
+data/*.db-shm
+*.db
+*.db-wal
+*.db-shm
+
+# OS generated files
+.DS_Store
+Thumbs.db

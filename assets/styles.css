@@ -1,0 +1,213 @@
+/* ==========================================================================
+   BhashaVerse 2.0 - Theme System
+   Uses Streamlit Default Palette (Red #FF4B4B, Neutral Blacks/Whites)
+   Full Light and Dark Theme Support
+   ========================================================================== */
+
+:root {
+    --bv-primary: #FF4B4B;
+    --bv-primary-dark: #D43B3B;
+    --bv-primary-light: rgba(255, 75, 75, 0.12);
+    --bv-bg: var(--background-color, #FFFFFF);
+    --bv-surface: var(--secondary-background-color, #F0F2F6);
+    --bv-text: var(--text-color, #31333F);
+    --bv-muted: rgba(120, 120, 130, 0.9);
+    --bv-border: rgba(128, 128, 128, 0.2);
+    --bv-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bv-primary: #FF4B4B;
+        --bv-primary-dark: #FF6C6C;
+        --bv-primary-light: rgba(255, 75, 75, 0.2);
+        --bv-bg: var(--background-color, #0E1117);
+        --bv-surface: var(--secondary-background-color, #262730);
+        --bv-text: var(--text-color, #FAFAFA);
+        --bv-muted: #9E9E9E;
+        --bv-border: rgba(255, 255, 255, 0.12);
+    }
+}
+
+/* Hero & Landing Banners */
+.bv-landing-hero {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin-bottom: 1.25rem;
+    background: var(--bv-surface);
+    border: 1px solid var(--bv-border);
+    border-top: 4px solid var(--bv-primary);
+    border-radius: var(--bv-radius);
+}
+
+.bv-landing-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--bv-text);
+    margin: 0;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+}
+
+.bv-landing-tagline {
+    font-size: 1.15rem;
+    color: var(--bv-primary);
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}
+
+.bv-hero-banner {
+    background: var(--bv-surface);
+    border: 1px solid var(--bv-border);
+    border-left: 5px solid var(--bv-primary);
+    border-radius: var(--bv-radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.bv-hero-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--bv-text);
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+.bv-hero-tagline {
+    font-size: 0.95rem;
+    color: var(--bv-primary);
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* Badges */
+.bv-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bv-badge-lang {
+    background-color: var(--bv-primary-light);
+    color: var(--bv-primary);
+    border: 1px solid var(--bv-primary);
+}
+
+.bv-badge-cat {
+    background-color: rgba(128, 128, 128, 0.12);
+    color: var(--bv-text);
+    border: 1px solid var(--bv-border);
+}
+
+/* Proverb Cards */
+.bv-card {
+    background: var(--bv-surface);
+    border: 1px solid var(--bv-border);
+    border-left: 4px solid var(--bv-primary);
+    border-radius: var(--bv-radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.bv-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--bv-primary);
+}
+
+.bv-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.bv-proverb-text {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--bv-text);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.bv-proverb-text.rtl {
+    direction: rtl;
+    text-align: right;
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.bv-translation {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--bv-muted);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--bv-primary);
+}
+
+.bv-meaning {
+    font-size: 0.92rem;
+    color: var(--bv-text);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.bv-context {
+    background-color: rgba(128, 128, 128, 0.08);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--bv-muted);
+    border: 1px dashed var(--bv-border);
+    margin-top: 0.4rem;
+}
+
+.bv-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--bv-border);
+    font-size: 0.8rem;
+    color: var(--bv-muted);
+}
+
+/* Language Tiles */
+.bv-lang-card {
+    background: var(--bv-surface);
+    border: 1px solid var(--bv-border);
+    border-radius: 6px;
+    padding: 0.6rem 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.bv-lang-name-native {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--bv-text);
+}
+
+.bv-lang-name-en {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--bv-muted);
+}
+
+/* Footer */
+.bv-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--bv-border);
+    color: var(--bv-muted);
+    font-size: 0.8rem;
+}
