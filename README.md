@@ -1,7 +1,7 @@
-# BhashaVerse 2.0 📜🇮🇳
-### Multilingual Indian Proverb and Cultural Knowledge Collection Platform
+# Bhashaverse 📜🇮🇳
+### Preserve India's Cultural Wisdom - One Proverb at a time
 
-> *"Preserving Languages. Connecting Cultures. Empowering AI."*
+> *"Preserve India's Cultural Wisdom - One Proverb at a time"*
 
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/framework-Streamlit-red.svg)](https://streamlit.io/)
