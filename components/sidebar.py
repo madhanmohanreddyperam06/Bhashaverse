@@ -35,17 +35,6 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
             unsafe_allow_html=True
         )
 
-        # Navigation Links
-        st.markdown("<p style='font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9E9E9E; margin-bottom: 0.35rem;'>Navigation</p>", unsafe_allow_html=True)
-        st.page_link("app.py", label="Home (Chatbot)", icon="🤖")
-        st.page_link("pages/1_Explore_Proverbs.py", label="Explore Proverbs", icon="🔍")
-        st.page_link("pages/2_Add_Proverb.py", label="Add Proverb", icon="✍️")
-        st.page_link("pages/3_Dashboard.py", label="Dashboard & Export", icon="📊")
-        st.page_link("pages/4_Moderation.py", label="Moderation", icon="🛡️")
-        st.page_link("pages/5_About.py", label="About", icon="ℹ️")
-
-        st.divider()
-
         # Chatbot Controls (when on home/chatbot page)
         if is_chatbot_page:
             st.markdown("<p style='font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #9E9E9E; margin-bottom: 0.35rem;'>Chat Settings</p>", unsafe_allow_html=True)
