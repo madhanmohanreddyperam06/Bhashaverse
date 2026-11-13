@@ -6,7 +6,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Bhashaverse",
-    page_icon="📜",
+    page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -28,7 +28,7 @@ sidebar_settings = render_sidebar(is_chatbot_page=True)
 load_css()
 
 # Heading & sub-heading fully left to the page (No Card)
-st.title(f"📜 {APP_NAME}")
+st.title(f"🌿 {APP_NAME}")
 st.caption(f'"{APP_TAGLINE}"')
 
 # Chat Session State (Empty by default - no placeholder messages)

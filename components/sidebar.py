@@ -23,7 +23,7 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
 
     with st.sidebar:
         # Title and Sub-heading at the very top (Clean UI, Monochromatic, No Colors)
-        st.subheader(f"📜 {APP_NAME}")
+        st.subheader(f"🌿 {APP_NAME}")
         st.caption(f'"{APP_TAGLINE}"')
         st.divider()
 

@@ -1,4 +1,4 @@
-# 📜Bhashaverse
+# 🌿Bhashaverse
 > *"Preserving Languages. Connecting Cultures. Empowering AI."*
 
 [![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/)
