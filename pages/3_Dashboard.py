@@ -18,7 +18,6 @@ from database import get_statistics, export_proverbs
 from components.navbar import render_header
 from components.sidebar import render_sidebar
 from components.metric_cards import render_metric_cards
-from components.footer import render_footer
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 
 render_header(
@@ -144,5 +143,3 @@ with st.container(border=True):
             mime="application/json",
             use_container_width=True
         )
-
-render_footer()

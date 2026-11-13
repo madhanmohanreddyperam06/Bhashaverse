@@ -21,7 +21,6 @@ from database import add_proverb
 from utils.validation import validate_proverb_submission
 from components.navbar import render_header
 from components.sidebar import render_sidebar
-from components.footer import render_footer
 
 render_header(
     title="Contribute a Proverb",
@@ -139,5 +138,3 @@ if submitted:
                 st.markdown(f"**Status:** :orange[Pending Review]")
         except Exception as e:
             st.error(f"Database error: {e}")
-
-render_footer()

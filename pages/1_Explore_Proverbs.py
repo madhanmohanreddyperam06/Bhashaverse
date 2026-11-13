@@ -18,7 +18,6 @@ from database import get_approved_proverbs
 from components.navbar import render_header
 from components.sidebar import render_sidebar
 from components.proverb_card import render_proverb_card
-from components.footer import render_footer
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 
 render_header(
@@ -152,5 +151,3 @@ if proverbs:
                 st.rerun()
 else:
     st.info("No proverbs match your criteria. Try adjusting your search query or language filter.")
-
-render_footer()

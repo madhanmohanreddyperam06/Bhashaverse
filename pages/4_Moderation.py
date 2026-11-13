@@ -40,7 +40,6 @@ from utils.language_utils import is_rtl, get_display_label
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 from components.navbar import render_header
 from components.sidebar import render_sidebar
-from components.footer import render_footer
 
 render_header(title="Moderation Console", badge_text="Restricted Access")
 render_sidebar()
@@ -69,7 +68,6 @@ if not is_moderator_authenticated(st.session_state):
                     else:
                         st.error("Invalid passcode. Please verify and try again.")
 
-    render_footer()
     st.stop()
 
 
@@ -321,5 +319,3 @@ with tab_export:
             mime="application/json",
             use_container_width=True
         )
-
-render_footer()

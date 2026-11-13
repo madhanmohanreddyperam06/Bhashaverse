@@ -19,7 +19,6 @@ from config import (
 )
 from components.navbar import render_header
 from components.sidebar import render_sidebar
-from components.footer import render_footer
 
 render_header(
     title="About Bhashaverse",
@@ -64,5 +63,3 @@ pip install -r requirements.txt
 streamlit run app.py""",
         language="bash"
     )
-
-render_footer()
