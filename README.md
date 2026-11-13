@@ -1,17 +1,15 @@
 # 🌿Bhashaverse
-> *"Preserving Languages. Connecting Cultures. Empowering AI."*
+ Preserving Languages. Connecting Cultures. Empowering AI
 
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Ollama](https://img.shields.io/badge/Ollama-black?logo=ollama&logoColor=white)](https://ollama.ai/)
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ---
 
-## 1. Project Overview
+## Project Overview
 
-**BhashaVerse 2.0** is an open-source, community-driven digital humanities platform built to collect, preserve, organize, and explore traditional Indian proverbs, folk sayings (*lokoktiyan / samethalu / pazhamozhigal / dakhla*), idioms, and generational cultural expressions.
+**BhashaVerse** is an open-source, community-driven digital humanities platform built to collect, preserve, organize, and explore traditional Indian proverbs, folk sayings (*lokoktiyan / samethalu / pazhamozhigal / dakhla*), idioms, and generational cultural expressions.
 
 India is home to thousands of oral traditions passed down through generations. However, in an era of rapid digital homogenization, nuanced regional expressions and rural folk idioms risk fading into obscurity. Furthermore, modern AI and Large Language Models often fail to comprehend figurative Indian speech, translating idioms literally and losing cultural essence.
 
@@ -19,7 +17,7 @@ BhashaVerse bridges this gap by creating a human-verified, structured, multiling
 
 ---
 
-## 2. Key Features
+## Key Features
 
 - **10 Supported Indian Languages:** Comprehensive native script support across Indo-Aryan, Dravidian, and Perso-Arabic language families.
 - **Frictionless Community Contributions:** Native speakers can contribute proverbs anonymously without mandatory logins or intrusive OAuth tracking.
@@ -39,7 +37,7 @@ BhashaVerse bridges this gap by creating a human-verified, structured, multiling
 
 ---
 
-## 3. Supported Languages
+## Supported Languages
 
 BhashaVerse supports 10 major Indian regional languages with complete native script typography and text direction:
 
@@ -58,7 +56,7 @@ BhashaVerse supports 10 major Indian regional languages with complete native scr
 
 ---
 
-## 4. Thematic Categories
+## Thematic Categories
 
 Contributions can be categorized into 11 themes:
 - **Wisdom**
@@ -75,7 +73,7 @@ Contributions can be categorized into 11 themes:
 
 ---
 
-## 5. Technology Stack
+## Technology Stack
 
 - **Python:** Core programming language (v3.10+)
 - **Streamlit:** Modern web application and user interface framework (v1.30+)
@@ -88,7 +86,7 @@ Contributions can be categorized into 11 themes:
 
 ---
 
-## 6. Project Architecture
+## Project Architecture
 
 ```text
 BhashaVerse/
@@ -144,7 +142,7 @@ BhashaVerse/
 
 ---
 
-## 7. Database Schema Overview
+## Database Schema Overview
 
 The SQLite database (`bhashaverse.db`) consists of two relational tables:
 
@@ -192,7 +190,7 @@ Immutable audit trail capturing all submissions, edits, approvals, and rejection
 
 ---
 
-## 8. Installation & Local Execution
+## Installation & Local Execution
 
 ### Prerequisites
 - Python 3.10, 3.11, 3.12, 3.13, or 3.14
@@ -245,7 +243,7 @@ Open your browser at `http://localhost:8501`. On first launch, the database auto
 
 ---
 
-## 9. Moderation Workflow
+## Moderation Workflow
 
 1. **Submission:** A contributor submits a proverb via the **Contribute** form. It is assigned a tracking UUID and stored in SQLite with `status = 'pending'`.
 2. **Access Control:** The **Moderation Console** (`pages/4_Moderation.py`) requires a maintainer passkey (`MODERATOR_KEY`) verified via constant-time comparison (`hmac.compare_digest`).
@@ -258,7 +256,7 @@ Open your browser at `http://localhost:8501`. On first launch, the database auto
 
 ---
 
-## 10. Dataset Exports for NLP & AI Research
+## Dataset Exports for NLP & AI Research
 
 Researchers and data scientists can download the verified corpus directly from the **Dashboard** (`pages/3_Dashboard.py`):
 
@@ -268,7 +266,7 @@ Researchers and data scientists can download the verified corpus directly from t
 
 ---
 
-## 11. Deployment Guide
+## Deployment Guide
 
 ### Deploying to Streamlit Community Cloud
 
@@ -287,7 +285,7 @@ Researchers and data scientists can download the verified corpus directly from t
 
 ---
 
-## 12. Contribution Guidelines
+## Contribution Guidelines
 
 We welcome community contributions from developers, linguists, and cultural enthusiasts!
 
@@ -299,7 +297,7 @@ We welcome community contributions from developers, linguists, and cultural enth
 
 ---
 
-## 13. License
+## License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 You are free to use, modify, distribute, and integrate this software and its open datasets for research, education, and commercial applications.
