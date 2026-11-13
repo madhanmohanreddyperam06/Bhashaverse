@@ -19,17 +19,13 @@
 
 /* Base Canvas & Viewport - Times New Roman Across Entire App */
 html, body, [data-testid="stAppViewContainer"], .stApp,
-h1, h2, h3, h4, h5, h6, p, div, span, label, input, textarea, button, select,
+h1, h2, h3, h4, h5, h6, p, label, input, textarea,
 .stMarkdown, .stText, [data-testid="stSidebar"], [data-testid="stWidgetLabel"],
-.stChatMessage, [data-testid="stChatInput"], [data-testid="stChatInput"] textarea,
+.stChatMessage, [data-testid="stChatInput"] textarea,
 [data-testid="stMetricValue"], [data-testid="stMetricLabel"],
-.stButton, .stButton button, .stDownloadButton button,
-.stSelectbox, .stTextInput, .stTextArea,
+.stButton button, .stDownloadButton button,
+.stTextInput input, .stTextArea textarea,
 table, th, td, blockquote, caption, .bv-badge {
-    font-family: "Times New Roman", Times, Georgia, serif !important;
-}
-
-* {
     font-family: "Times New Roman", Times, Georgia, serif !important;
 }
 
@@ -166,4 +162,32 @@ div[data-testid="stMetricLabel"] {
     color: #9E9E9E !important;
     font-size: 0.85rem !important;
     font-weight: 500 !important;
+}
+
+/* ==========================================================================
+   Preserve All Arrow Symbols, Chevrons, Dropdowns, and Material Icons
+   Protects sidebar collapse/expand arrows, expander chevrons, selectbox arrows,
+   and chat submit buttons from font corruption.
+   ========================================================================== */
+[data-testid="stIconMaterial"],
+[data-testid="collapsedControl"],
+[data-testid="collapsedControl"] *,
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stSidebarCollapseButton"] *,
+[data-testid="stExpanderToggleIcon"],
+[data-testid="stExpanderToggleIcon"] *,
+[data-testid="stChatInputSubmitButton"],
+[data-testid="stChatInputSubmitButton"] *,
+span[translate="no"],
+.material-symbols-rounded,
+[class*="material-symbols"],
+[class*="MaterialSymbols"],
+[data-baseweb="icon"],
+[data-baseweb="icon"] *,
+[data-baseweb="select"] svg,
+[data-baseweb="select"] svg *,
+button[kind="header"] *,
+svg,
+svg * {
+    font-family: "Material Symbols Rounded", sans-serif !important;
 }
