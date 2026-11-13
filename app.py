@@ -26,9 +26,10 @@ sidebar_settings = render_sidebar(is_chatbot_page=True)
 # Load theme CSS
 load_css()
 
-# Official Streamlit Heading (Left-aligned by default)
-st.title(f"📜 {APP_NAME}")
-st.caption(f'"{APP_TAGLINE}"')
+# Header and sub-header in an official Streamlit card-like container
+with st.container(border=True):
+    st.markdown(f"## 📜 {APP_NAME}")
+    st.caption(f'"{APP_TAGLINE}"')
 
 # Chat Session State (Empty by default - no placeholder messages)
 if "chat_messages" not in st.session_state:
