@@ -23,19 +23,12 @@ init_db(seed_defaults=True)
 # Render sidebar navigation and settings
 sidebar_settings = render_sidebar(is_chatbot_page=True)
 
-# Load permanent dark theme CSS
+# Load theme CSS
 load_css()
 
-# Heading Only (Left-aligned in desktop view)
-st.markdown(
-    f"""
-    <div class="bv-landing-hero" style="text-align: left;">
-        <h1 class="bv-landing-title" style="text-align: left;">{APP_NAME}</h1>
-        <p class="bv-landing-tagline" style="text-align: left;">"{APP_TAGLINE}"</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Official Streamlit Heading (Left-aligned by default)
+st.title(f"📜 {APP_NAME}")
+st.caption(f'"{APP_TAGLINE}"')
 
 # Chat Session State (Empty by default - no placeholder messages)
 if "chat_messages" not in st.session_state:

@@ -1,7 +1,6 @@
 """
-BhashaVerse 2.0 - Proverb Card Component
-Renders individual proverbs with native scripts, RTL text alignment for Urdu,
-language and category badges, cultural context, and contributor attribution.
+Bhashaverse - Proverb Card Component
+Renders individual proverbs using official Streamlit containers and components.
 """
 
 from typing import Dict, Any
@@ -12,7 +11,7 @@ from utils.language_utils import is_rtl, get_display_label
 
 
 def render_proverb_card(proverb_data: Dict[str, Any], show_actions: bool = False) -> None:
-    """Render a single proverb card with full cultural metadata and styling."""
+    """Render a single proverb card using official Streamlit bordered container."""
     proverb_text = sanitize_text(proverb_data.get("proverb", ""))
     language = proverb_data.get("language", "Unknown")
     display_lang = sanitize_text(get_display_label(language))
@@ -23,41 +22,30 @@ def render_proverb_card(proverb_data: Dict[str, Any], show_actions: bool = False
     contributor = sanitize_text(proverb_data.get("contributor_name", "Anonymous"))
     date_str = format_iso_date(proverb_data.get("created_at"))
 
-    rtl_class = "rtl" if is_rtl(language) else ""
+    with st.container(border=True):
+        col_meta, col_date = st.columns([0.68, 0.32])
+        with col_meta:
+            st.markdown(f":red[**{display_lang}**] &nbsp;·&nbsp; :gray[{category}]")
+        with col_date:
+            st.caption(f"📅 {date_str}")
 
-    translation_html = (
-        f"""<div class="bv-translation">"{translation}"</div>"""
-        if translation else ""
-    )
+        # Proverb text
+        if is_rtl(language):
+            st.markdown(f"<div class='rtl-text'>{proverb_text}</div>", unsafe_allow_html=True)
+        else:
+            st.subheader(proverb_text)
 
-    context_html = (
-        f"""
-        <div class="bv-context">
-            <strong>🏛️ Cultural Context:</strong> {cultural_context}
-        </div>
-        """
-        if cultural_context else ""
-    )
+        # English Translation
+        if translation:
+            st.markdown(f'> *"{translation}"*')
 
-    card_html = f"""
-    <div class="bv-card">
-        <div class="bv-card-header">
-            <span class="bv-badge bv-badge-lang">{display_lang}</span>
-            <span class="bv-badge bv-badge-cat">{category}</span>
-        </div>
-        <div class="bv-proverb-text {rtl_class}">
-            {proverb_text}
-        </div>
-        {translation_html}
-        <div class="bv-meaning">
-            <strong>💡 Meaning:</strong> {meaning}
-        </div>
-        {context_html}
-        <div class="bv-card-footer">
-            <span>👤 Contributed by <strong>{contributor}</strong></span>
-            <span>📅 {date_str}</span>
-        </div>
-    </div>
-    """
+        # Meaning
+        st.markdown(f"**💡 Meaning:** {meaning}")
 
-    st.markdown(card_html, unsafe_allow_html=True)
+        # Cultural Context
+        if cultural_context:
+            with st.expander("🏛️ Cultural Context", expanded=False):
+                st.write(cultural_context)
+
+        # Contributor Attribution
+        st.caption(f"👤 Contributed by **{contributor}**")

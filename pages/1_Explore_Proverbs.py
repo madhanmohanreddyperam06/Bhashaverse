@@ -1,5 +1,5 @@
 """
-BhashaVerse 2.0 - Explore Proverbs
+Bhashaverse - Explore Proverbs
 Browse, search, and filter the approved multilingual Indian proverb corpus.
 """
 
@@ -7,7 +7,7 @@ import math
 import streamlit as st
 
 st.set_page_config(
-    page_title="Explore Proverbs | BhashaVerse 2.0",
+    page_title="Explore Proverbs | Bhashaverse",
     page_icon="🔍",
     layout="wide"
 )
@@ -20,42 +20,46 @@ from components.proverb_card import render_proverb_card
 from components.footer import render_footer
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 
-render_header(title="🔍 Explore Proverbs")
+render_header(
+    title="🔍 Explore Proverbs",
+    subtitle="Search, filter, and discover cultural wisdom across 10 Indian regional languages"
+)
 render_sidebar()
 
-# Search and Filter Controls
-filter_col1, filter_col2, filter_col3, filter_col4 = st.columns([2.5, 1.2, 1.2, 1.1])
+# Search & Filters in an official bordered container
+with st.container(border=True):
+    filter_col1, filter_col2, filter_col3, filter_col4 = st.columns([2.5, 1.2, 1.2, 1.1])
 
-with filter_col1:
-    search_query = st.text_input(
-        "Search",
-        placeholder="Search proverb, translation, or meaning...",
-        key="explore_search"
-    )
+    with filter_col1:
+        search_query = st.text_input(
+            "Search",
+            placeholder="Search proverb, translation, or meaning...",
+            key="explore_search"
+        )
 
-with filter_col2:
-    selected_language = st.selectbox(
-        "Language",
-        options=["All"] + LANGUAGE_NAMES,
-        index=0,
-        key="explore_lang"
-    )
+    with filter_col2:
+        selected_language = st.selectbox(
+            "Language",
+            options=["All"] + LANGUAGE_NAMES,
+            index=0,
+            key="explore_lang"
+        )
 
-with filter_col3:
-    selected_category = st.selectbox(
-        "Category",
-        options=["All"] + CATEGORIES,
-        index=0,
-        key="explore_cat"
-    )
+    with filter_col3:
+        selected_category = st.selectbox(
+            "Category",
+            options=["All"] + CATEGORIES,
+            index=0,
+            key="explore_cat"
+        )
 
-with filter_col4:
-    sort_option = st.selectbox(
-        "Sort",
-        options=["Newest First", "Oldest First", "Alphabetical"],
-        index=0,
-        key="explore_sort"
-    )
+    with filter_col4:
+        sort_option = st.selectbox(
+            "Sort",
+            options=["Newest First", "Oldest First", "Alphabetical"],
+            index=0,
+            key="explore_sort"
+        )
 
 sort_map = {
     "Newest First": "newest",
@@ -88,15 +92,10 @@ proverbs, total_count = get_approved_proverbs(
 
 total_pages = max(1, math.ceil(total_count / DEFAULT_PAGE_SIZE))
 
-# Results count & Export buttons
-res_col1, res_col2 = st.columns([2, 1])
+# Status header & Export Actions
+res_col1, res_col2 = st.columns([0.7, 0.3])
 with res_col1:
-    st.markdown(
-        f"<p style='color: var(--bv-muted); font-size: 0.9rem; margin-top: 0.5rem;'>"
-        f"Showing <strong>{len(proverbs)}</strong> of <strong>{total_count}</strong> proverbs (Page {current_page} of {total_pages})"
-        f"</p>",
-        unsafe_allow_html=True
-    )
+    st.caption(f"Showing **{len(proverbs)}** of **{total_count}** proverbs (Page **{current_page}** of **{total_pages}**)")
 
 with res_col2:
     if total_count > 0:
@@ -104,7 +103,7 @@ with res_col2:
         with c_csv:
             csv_data = generate_csv_export(proverbs, is_maintainer=False)
             st.download_button(
-                label="📥 Page CSV",
+                label="📥 CSV",
                 data=csv_data,
                 file_name=get_export_filename(f"proverbs_{selected_language.lower()}", "csv"),
                 mime="text/csv",
@@ -113,14 +112,12 @@ with res_col2:
         with c_json:
             json_data = generate_json_export(proverbs, is_maintainer=False)
             st.download_button(
-                label="📥 Page JSON",
+                label="📥 JSON",
                 data=json_data,
                 file_name=get_export_filename(f"proverbs_{selected_language.lower()}", "json"),
                 mime="application/json",
                 use_container_width=True
             )
-
-st.divider()
 
 # Proverb Grid Display
 if proverbs:
@@ -130,9 +127,9 @@ if proverbs:
         with target:
             render_proverb_card(p)
 
-    # Pagination Controls
+    # Official Streamlit Pagination Controls
     if total_pages > 1:
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.divider()
         pag_col1, pag_col2, pag_col3, pag_col4, pag_col5 = st.columns([1, 1, 2, 1, 1])
         with pag_col1:
             if st.button("⏮️ First", disabled=(current_page == 1), use_container_width=True):
@@ -143,10 +140,7 @@ if proverbs:
                 st.session_state["explore_page"] = max(1, current_page - 1)
                 st.rerun()
         with pag_col3:
-            st.markdown(
-                f"<div style='text-align: center; padding-top: 0.4rem; font-weight: 600; color: var(--bv-primary);'>Page {current_page} / {total_pages}</div>",
-                unsafe_allow_html=True
-            )
+            st.markdown(f"<div style='text-align: center; padding-top: 0.5rem;'>Page <strong>{current_page}</strong> of <strong>{total_pages}</strong></div>", unsafe_allow_html=True)
         with pag_col4:
             if st.button("Next ▶️", disabled=(current_page >= total_pages), use_container_width=True):
                 st.session_state["explore_page"] = min(total_pages, current_page + 1)
@@ -156,6 +150,6 @@ if proverbs:
                 st.session_state["explore_page"] = total_pages
                 st.rerun()
 else:
-    st.info("No proverbs match your criteria.")
+    st.info("No proverbs match your criteria. Try adjusting your search query or language filter.")
 
 render_footer()

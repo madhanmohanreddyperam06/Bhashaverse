@@ -1,13 +1,13 @@
 /* ==========================================================================
-   Bhashaverse - Permanent Dark Theme System
-   Streamlit Official Palette (Red #FF4B4B, Deep Blacks #0E1117, Dark Surface #161B22)
-   Strictly Dark Mode
+   Bhashaverse - Professional Dark Theme Stylesheet
+   Grounded in Official Streamlit Dark Design Patterns
+   Primary: #FF4B4B | Background: #0E1117 | Surface: #161B22
    ========================================================================== */
 
 :root {
     --bv-primary: #FF4B4B;
     --bv-primary-dark: #FF6C6C;
-    --bv-primary-light: rgba(255, 75, 75, 0.2);
+    --bv-primary-light: rgba(255, 75, 75, 0.18);
     --bv-bg: #0E1117;
     --bv-surface: #161B22;
     --bv-text: #FAFAFA;
@@ -16,56 +16,57 @@
     --bv-radius: 8px;
 }
 
-/* Global Dark Mode Enforcement */
+/* Base Canvas & Viewport */
 html, body, [data-testid="stAppViewContainer"], .stApp {
     background-color: #0E1117 !important;
     color: #FAFAFA !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 }
 
+/* Sidebar styling */
 [data-testid="stSidebar"], section[data-testid="stSidebar"] {
     background-color: #161B22 !important;
     color: #FAFAFA !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Main Container Padding */
+/* Main Container Spacing */
 .stMainBlockContainer, [data-testid="stMainBlockContainer"], .block-container {
-    padding-top: 1.5rem !important;
-    padding-bottom: 5.5rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 6rem !important;
     max-width: 1100px !important;
 }
 
-/* Landing Header - Left-Aligned in Desktop & Clean Title */
-.bv-landing-hero {
-    text-align: left !important;
-    padding: 1rem 0 0.5rem 0;
-    margin-bottom: 1.5rem;
-    background: transparent !important;
+/* Native Container / Card Enhancements */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 10px !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: #161B22 !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    border-color: rgba(255, 75, 75, 0.35) !important;
+}
+
+/* Urdu / Arabic RTL Typography */
+.rtl-text {
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Scheherazade", serif !important;
+    font-size: 1.35rem !important;
+    line-height: 2 !important;
+}
+
+/* Streamlit Chat Messages */
+.stChatMessage {
+    background-color: transparent !important;
     border: none !important;
-    box-shadow: none !important;
-}
-
-.bv-landing-title {
-    font-size: 2.8rem;
-    font-weight: 800;
+    padding: 0.5rem 0.25rem !important;
     color: #FAFAFA !important;
-    margin: 0;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-    text-align: left !important;
 }
 
-.bv-landing-tagline {
-    font-size: 1.15rem;
-    color: var(--bv-primary) !important;
-    font-weight: 600;
-    font-style: italic;
-    margin-top: 0.35rem;
-    margin-bottom: 0;
-    text-align: left !important;
-}
-
-/* Chat Input Bar - Fixed at Bottom-most edge */
+/* Chat Input Bar - Fixed at Bottom */
 [data-testid="stBottom"] {
     position: fixed !important;
     bottom: 0 !important;
@@ -91,15 +92,6 @@ html, body, [data-testid="stAppViewContainer"], .stApp {
     background-color: transparent !important;
 }
 
-/* Chat Messages - Clean Flow without Card */
-.stChatMessage {
-    background-color: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    padding: 0.75rem 0.25rem !important;
-    color: #FAFAFA !important;
-}
-
 /* Badges */
 .bv-badge {
     display: inline-block;
@@ -112,120 +104,25 @@ html, body, [data-testid="stAppViewContainer"], .stApp {
 }
 
 .bv-badge-lang {
-    background-color: var(--bv-primary-light);
-    color: var(--bv-primary);
-    border: 1px solid var(--bv-primary);
+    background-color: rgba(255, 75, 75, 0.18);
+    color: #FF4B4B;
+    border: 1px solid #FF4B4B;
 }
 
 .bv-badge-cat {
     background-color: rgba(255, 255, 255, 0.08);
     color: #FAFAFA;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Proverb Cards */
-.bv-card {
-    background: #161B22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-left: 4px solid var(--bv-primary) !important;
-    border-radius: var(--bv-radius);
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-}
-
-.bv-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--bv-primary) !important;
-}
-
-.bv-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-}
-
-.bv-proverb-text {
-    font-size: 1.35rem;
-    font-weight: 700;
+/* Metric Value Colors */
+div[data-testid="stMetricValue"] {
     color: #FAFAFA !important;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
+    font-weight: 700 !important;
 }
 
-.bv-proverb-text.rtl {
-    direction: rtl;
-    text-align: right;
-    font-size: 1.5rem;
-    line-height: 1.8;
-}
-
-.bv-translation {
-    font-size: 0.95rem;
-    font-style: italic;
-    color: var(--bv-muted);
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 2px solid var(--bv-primary);
-}
-
-.bv-meaning {
-    font-size: 0.92rem;
-    color: #FAFAFA !important;
-    line-height: 1.5;
-    margin-bottom: 0.5rem;
-}
-
-.bv-context {
-    background-color: rgba(255, 255, 255, 0.04);
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.85rem;
-    color: var(--bv-muted);
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    margin-top: 0.4rem;
-}
-
-.bv-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.75rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
-    color: var(--bv-muted);
-}
-
-/* Language Tiles */
-.bv-lang-card {
-    background: #161B22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    border-radius: 6px;
-    padding: 0.6rem 0.5rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-.bv-lang-name-native {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #FAFAFA !important;
-}
-
-.bv-lang-name-en {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--bv-muted);
-}
-
-/* Footer */
-.bv-footer {
-    text-align: center;
-    padding-top: 1.5rem;
-    margin-top: 2.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--bv-muted);
-    font-size: 0.8rem;
+div[data-testid="stMetricLabel"] {
+    color: #9E9E9E !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
 }
