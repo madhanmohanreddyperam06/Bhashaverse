@@ -1,6 +1,7 @@
 /* ==========================================================================
    Bhashaverse - Professional Dark Theme Stylesheet
    Grounded in Official Streamlit Dark Design Patterns
+   Font Family: Times New Roman Across Entire App
    Primary: #FF4B4B | Background: #0E1117 | Surface: #161B22
    ========================================================================== */
 
@@ -16,11 +17,20 @@
     --bv-radius: 8px;
 }
 
-/* Base Canvas & Viewport */
-html, body, [data-testid="stAppViewContainer"], .stApp {
-    background-color: #0E1117 !important;
-    color: #FAFAFA !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+/* Base Canvas & Viewport - Times New Roman Across Entire App */
+html, body, [data-testid="stAppViewContainer"], .stApp,
+h1, h2, h3, h4, h5, h6, p, div, span, label, input, textarea, button, select,
+.stMarkdown, .stText, [data-testid="stSidebar"], [data-testid="stWidgetLabel"],
+.stChatMessage, [data-testid="stChatInput"], [data-testid="stChatInput"] textarea,
+[data-testid="stMetricValue"], [data-testid="stMetricLabel"],
+.stButton, .stButton button, .stDownloadButton button,
+.stSelectbox, .stTextInput, .stTextArea,
+table, th, td, blockquote, caption, .bv-badge {
+    font-family: "Times New Roman", Times, Georgia, serif !important;
+}
+
+* {
+    font-family: "Times New Roman", Times, Georgia, serif !important;
 }
 
 /* Sidebar styling */
@@ -33,16 +43,25 @@ html, body, [data-testid="stAppViewContainer"], .stApp {
 /* Main Container Spacing - Fully Left to the Page */
 .stMainBlockContainer, [data-testid="stMainBlockContainer"], .block-container {
     padding-top: 1.5rem !important;
-    padding-bottom: 6rem !important;
+    padding-bottom: 7rem !important;
     padding-left: 2rem !important;
     padding-right: 2rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     max-width: 100% !important;
 }
 
 /* Heading and Caption Left-Alignment */
-h1, .stTitle, div[data-testid="stHeading"] {
+h1, .stTitle, div[data-testid="stHeading"], [data-testid="stHeadingWithActionElements"] {
     text-align: left !important;
     margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+div[data-testid="stCaptionContainer"] {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 /* Native Container / Card Styling */
@@ -56,34 +75,53 @@ h1, .stTitle, div[data-testid="stHeading"] {
 .rtl-text {
     direction: rtl !important;
     text-align: right !important;
-    font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Scheherazade", serif !important;
+    font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Scheherazade", "Times New Roman", serif !important;
     font-size: 1.35rem !important;
     line-height: 2 !important;
 }
 
-/* Streamlit Chat Messages */
+/* Streamlit Chat Messages - Left-Aligned with Page Content */
 .stChatMessage {
     background-color: transparent !important;
     border: none !important;
-    padding: 0.5rem 0.25rem !important;
+    padding: 0.5rem 0 !important;
+    margin-left: 0 !important;
     color: #FAFAFA !important;
 }
 
-/* Chat Input Bar - Fixed at Bottom */
+/* Chat Input Bar - Fixed at Bottom & Vertically Aligned with Heading on Left */
 [data-testid="stBottom"] {
     position: fixed !important;
     bottom: 0 !important;
-    padding-bottom: 0.4rem !important;
+    padding-bottom: 0.5rem !important;
     background: transparent !important;
     z-index: 99 !important;
 }
 
+/* Streamlit defaults to align-items: center in StyledInnerBottomContainer */
+[data-testid="stBottom"] > div {
+    align-items: flex-start !important;
+    background: transparent !important;
+}
+
+/* Matches .stMainBlockContainer left alignment and padding identically */
 [data-testid="stBottomBlockContainer"] {
-    padding-bottom: 0.25rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-bottom: 0.35rem !important;
     padding-top: 0.25rem !important;
 }
 
 [data-testid="stChatInput"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
     background-color: #161B22 !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: 10px !important;

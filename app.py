@@ -16,6 +16,7 @@ from database import init_db
 from utils.chatbot_utils import generate_chat_response
 from components.navbar import load_css
 from components.sidebar import render_sidebar
+from components.footer import render_footer
 
 # Initialize database
 init_db(seed_defaults=True)
@@ -63,3 +64,7 @@ if user_query:
             st.markdown(response_text)
 
     st.session_state["chat_messages"].append({"role": "assistant", "content": response_text})
+
+# Footer attribution
+render_footer()
+
