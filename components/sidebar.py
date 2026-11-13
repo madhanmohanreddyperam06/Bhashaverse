@@ -24,7 +24,7 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
     with st.sidebar:
         # Title and Sub-heading at the very top (Clean UI, Monochromatic, No Colors)
         st.subheader(f"🌿 {APP_NAME}")
-        st.caption(f'"{APP_TAGLINE}"')
+        st.caption(APP_TAGLINE)
         st.divider()
 
         # Page Navigation Links below Title
@@ -82,6 +82,5 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
 
         # Footer attribution at the very bottom of sidebar
         st.caption("Designed & Developed by Madhan Mohan Reddy Peram")
-        st.caption("Built with Streamlit v1.67.0")
 
     return chatbot_settings

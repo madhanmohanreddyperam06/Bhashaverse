@@ -16,7 +16,6 @@ from database import init_db
 from utils.chatbot_utils import generate_chat_response
 from components.navbar import load_css
 from components.sidebar import render_sidebar
-from components.footer import render_footer
 
 # Initialize database
 init_db(seed_defaults=True)
@@ -29,7 +28,7 @@ load_css()
 
 # Heading & sub-heading fully left to the page (No Card)
 st.title(f"🌿 {APP_NAME}")
-st.caption(f'"{APP_TAGLINE}"')
+st.caption(APP_TAGLINE)
 
 # Chat Session State (Empty by default - no placeholder messages)
 if "chat_messages" not in st.session_state:
@@ -63,7 +62,4 @@ if user_query:
             st.markdown(response_text)
 
     st.session_state["chat_messages"].append({"role": "assistant", "content": response_text})
-
-# Footer attribution
-render_footer()
 
