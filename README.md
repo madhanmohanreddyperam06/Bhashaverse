@@ -1,9 +1,10 @@
 # 🌿Bhashaverse
 > *"Preserving Languages. Connecting Cultures. Empowering AI."*
 
-[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/framework-Streamlit-red.svg)](https://streamlit.io/)
-[![Database](https://img.shields.io/badge/database-SQLite3%20(WAL%20mode)-lightgrey.svg)](https://www.sqlite.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Ollama](https://img.shields.io/badge/Ollama-black?logo=ollama&logoColor=white)](https://ollama.ai/)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
@@ -76,15 +77,14 @@ Contributions can be categorized into 11 themes:
 
 ## 5. Technology Stack
 
-- **Frontend & App Framework:** [Streamlit](https://streamlit.io/) (v1.30+)
-- **Styling:** Custom CSS (`assets/styles.css`) with Indian cultural color palette (Deep Indigo `#4338CA`, Saffron `#F59E0B`, Warm Off-White `#FAFAF7`)
-- **Backend & Logic:** Python 3.10+ modular services
-- **Database:** SQLite 3 via Python standard library `sqlite3`
-  - Write-Ahead Logging (WAL) mode
-  - Foreign key constraint enforcement (`PRAGMA foreign_keys = ON;`)
-  - 100% Parameterized queries (`?` parameter binding)
+- **Python:** Core programming language (v3.10+)
+- **Streamlit:** Modern web application and user interface framework (v1.30+)
+- **Ollama:** Local AI model orchestration and LLM inference engine
+- **SQLite:** Embedded transactional database with WAL mode and foreign key enforcement
+- **Styling:** Custom CSS (`assets/styles.css`) in dark mode
 - **Data Analysis & Visualization:** [Pandas](https://pandas.pydata.org/) and [Plotly Express](https://plotly.com/python/)
 - **Testing:** [pytest](https://docs.pytest.org/) with isolated temporary test databases
+- **License:** Open-source under the [MIT License](https://opensource.org/licenses/MIT)
 
 ---
 
