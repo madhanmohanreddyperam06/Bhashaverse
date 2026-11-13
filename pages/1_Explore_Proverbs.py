@@ -130,24 +130,16 @@ if proverbs:
     # Official Streamlit Pagination Controls
     if total_pages > 1:
         st.divider()
-        pag_col1, pag_col2, pag_col3, pag_col4, pag_col5 = st.columns([1, 1, 2, 1, 1])
+        pag_col1, pag_col2, pag_col3 = st.columns([1, 2, 1])
         with pag_col1:
-            if st.button("First", disabled=(current_page == 1), use_container_width=True):
-                st.session_state["explore_page"] = 1
-                st.rerun()
-        with pag_col2:
             if st.button("Previous", disabled=(current_page == 1), use_container_width=True):
                 st.session_state["explore_page"] = max(1, current_page - 1)
                 st.rerun()
-        with pag_col3:
+        with pag_col2:
             st.markdown(f"<div style='text-align: center; padding-top: 0.5rem;'>Page <strong>{current_page}</strong> of <strong>{total_pages}</strong></div>", unsafe_allow_html=True)
-        with pag_col4:
+        with pag_col3:
             if st.button("Next", disabled=(current_page >= total_pages), use_container_width=True):
                 st.session_state["explore_page"] = min(total_pages, current_page + 1)
-                st.rerun()
-        with pag_col5:
-            if st.button("Last", disabled=(current_page >= total_pages), use_container_width=True):
-                st.session_state["explore_page"] = total_pages
                 st.rerun()
 else:
     st.info("No proverbs match your criteria. Try adjusting your search query or language filter.")
