@@ -9,7 +9,7 @@ import plotly.express as px
 
 st.set_page_config(
     page_title="Analytics & Datasets | Bhashaverse",
-    page_icon="📊",
+    page_icon="📜",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -22,7 +22,7 @@ from components.footer import render_footer
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 
 render_header(
-    title="📊 Corpus Analytics & Exports",
+    title="Corpus Analytics & Exports",
     subtitle="Live SQLite database statistics, linguistic distribution, and open research dataset downloads"
 )
 render_sidebar()
@@ -127,7 +127,7 @@ with st.container(border=True):
     with exp_col1:
         csv_bytes = generate_csv_export(export_data, is_maintainer=False)
         st.download_button(
-            label=f"📄 Download CSV Corpus ({len(export_data)} records)",
+            label=f"Download CSV Corpus ({len(export_data)} records)",
             data=csv_bytes,
             file_name=get_export_filename("bhashaverse_corpus", "csv"),
             mime="text/csv",
@@ -138,7 +138,7 @@ with st.container(border=True):
     with exp_col2:
         json_str = generate_json_export(export_data, is_maintainer=False)
         st.download_button(
-            label=f"📦 Download JSON Corpus ({len(export_data)} records)",
+            label=f"Download JSON Corpus ({len(export_data)} records)",
             data=json_str,
             file_name=get_export_filename("bhashaverse_corpus", "json"),
             mime="application/json",

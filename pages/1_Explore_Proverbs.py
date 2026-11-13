@@ -8,7 +8,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Explore Proverbs | Bhashaverse",
-    page_icon="🔍",
+    page_icon="📜",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -22,7 +22,7 @@ from components.footer import render_footer
 from utils.export_utils import generate_csv_export, generate_json_export, get_export_filename
 
 render_header(
-    title="🔍 Explore Proverbs",
+    title="Explore Proverbs",
     subtitle="Search, filter, and discover cultural wisdom across 10 Indian regional languages"
 )
 render_sidebar()
@@ -104,7 +104,7 @@ with res_col2:
         with c_csv:
             csv_data = generate_csv_export(proverbs, is_maintainer=False)
             st.download_button(
-                label="📥 CSV",
+                label="Download CSV",
                 data=csv_data,
                 file_name=get_export_filename(f"proverbs_{selected_language.lower()}", "csv"),
                 mime="text/csv",
@@ -113,7 +113,7 @@ with res_col2:
         with c_json:
             json_data = generate_json_export(proverbs, is_maintainer=False)
             st.download_button(
-                label="📥 JSON",
+                label="Download JSON",
                 data=json_data,
                 file_name=get_export_filename(f"proverbs_{selected_language.lower()}", "json"),
                 mime="application/json",
@@ -133,21 +133,21 @@ if proverbs:
         st.divider()
         pag_col1, pag_col2, pag_col3, pag_col4, pag_col5 = st.columns([1, 1, 2, 1, 1])
         with pag_col1:
-            if st.button("⏮ First", disabled=(current_page == 1), use_container_width=True):
+            if st.button("First", disabled=(current_page == 1), use_container_width=True):
                 st.session_state["explore_page"] = 1
                 st.rerun()
         with pag_col2:
-            if st.button("◀ Prev", disabled=(current_page == 1), use_container_width=True):
+            if st.button("Previous", disabled=(current_page == 1), use_container_width=True):
                 st.session_state["explore_page"] = max(1, current_page - 1)
                 st.rerun()
         with pag_col3:
             st.markdown(f"<div style='text-align: center; padding-top: 0.5rem;'>Page <strong>{current_page}</strong> of <strong>{total_pages}</strong></div>", unsafe_allow_html=True)
         with pag_col4:
-            if st.button("Next ▶", disabled=(current_page >= total_pages), use_container_width=True):
+            if st.button("Next", disabled=(current_page >= total_pages), use_container_width=True):
                 st.session_state["explore_page"] = min(total_pages, current_page + 1)
                 st.rerun()
         with pag_col5:
-            if st.button("Last ⏭", disabled=(current_page >= total_pages), use_container_width=True):
+            if st.button("Last", disabled=(current_page >= total_pages), use_container_width=True):
                 st.session_state["explore_page"] = total_pages
                 st.rerun()
 else:

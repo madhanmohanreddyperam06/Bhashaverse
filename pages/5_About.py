@@ -7,7 +7,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="About | Bhashaverse",
-    page_icon="📖",
+    page_icon="📜",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -22,7 +22,7 @@ from components.sidebar import render_sidebar
 from components.footer import render_footer
 
 render_header(
-    title="📖 About Bhashaverse",
+    title="About Bhashaverse",
     subtitle=f"{APP_NAME} — {APP_TAGLINE}"
 )
 render_sidebar()

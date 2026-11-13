@@ -139,21 +139,21 @@ def generate_offline_response(
 
     # Greeting
     if any(greet in q_lower for greet in ["hello", "hi", "namaste", "vanakkam", "namaskara", "adaab", "pranam"]):
-        response_parts.append("🙏 **Namaste!** Here are proverbs and wisdom from our multilingual corpus:")
+        response_parts.append("**Namaste!** Here are proverbs and wisdom from our multilingual corpus:")
 
     # If proverbs were retrieved
     if context_proverbs:
         for p in context_proverbs[:4]:
             lang = p.get("language", "Indian")
-            trans_line = f"\n> 🔤 *Translation:* \"{p.get('english_translation')}\"" if p.get("english_translation") else ""
-            ctx_line = f"\n> 🏛️ *Context:* {p.get('cultural_context')}" if p.get("cultural_context") else ""
+            trans_line = f"\n> *Translation:* \"{p.get('english_translation')}\"" if p.get("english_translation") else ""
+            ctx_line = f"\n> *Context:* {p.get('cultural_context')}" if p.get("cultural_context") else ""
 
             card = (
-                f"### 📜 [{lang}] {p.get('proverb')}\n"
+                f"### [{lang}] {p.get('proverb')}\n"
                 f"{trans_line}\n"
-                f"> 💡 **Meaning:** {p.get('meaning')}"
+                f"> **Meaning:** {p.get('meaning')}"
                 f"{ctx_line}\n"
-                f"> 🏷️ `{p.get('category', 'Wisdom')}`\n"
+                f"> `{p.get('category', 'Wisdom')}`\n"
             )
             response_parts.append(card)
     else:

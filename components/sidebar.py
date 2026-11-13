@@ -74,7 +74,7 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
                 "language": target_lang
             }
 
-            if st.button("🧹 Clear Conversation", use_container_width=True, key="sidebar_clear_chat"):
+            if st.button("Clear Conversation", use_container_width=True, key="sidebar_clear_chat"):
                 st.session_state["chat_messages"] = []
                 st.rerun()
 

@@ -41,8 +41,7 @@ if len(st.session_state.get("chat_messages", [])) == 1 and st.session_state["cha
 
 # Render conversation history (only visible when user submits queries)
 for msg in st.session_state["chat_messages"]:
-    avatar = "👤" if msg["role"] == "user" else "📜"
-    with st.chat_message(msg["role"], avatar=avatar):
+    with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
 # Chat Input Bar
@@ -50,10 +49,10 @@ user_query = st.chat_input("Ask about proverbs, meanings, or cultural advice..."
 
 if user_query:
     st.session_state["chat_messages"].append({"role": "user", "content": user_query})
-    with st.chat_message("user", avatar="👤"):
+    with st.chat_message("user"):
         st.markdown(user_query)
 
-    with st.chat_message("assistant", avatar="📜"):
+    with st.chat_message("assistant"):
         with st.spinner("Searching cultural corpus..."):
             response_text = generate_chat_response(
                 query=user_query,

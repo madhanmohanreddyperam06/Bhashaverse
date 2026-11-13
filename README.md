@@ -20,21 +20,21 @@ BhashaVerse bridges this gap by creating a human-verified, structured, multiling
 
 ## 2. Key Features
 
-- **🗣️ 10 Supported Indian Languages:** Comprehensive native script support across Indo-Aryan, Dravidian, and Perso-Arabic language families.
-- **📝 Frictionless Community Contributions:** Native speakers can contribute proverbs anonymously without mandatory logins or intrusive OAuth tracking.
-- **🔍 Advanced Search & Discovery:** Full-text search across original proverb text, English translations, and meanings, coupled with language and category filtering and sorting.
-- **🛡️ Secure Maintainer Moderation Console:** Role-restricted portal for verifying submissions, editing metadata, rejecting spam with audit logs, and maintaining corpus integrity.
-- **📊 Real-Time SQLite Analytics:** Dynamic metric cards and interactive Plotly visualizations tracking corpus growth, language distribution, and thematic trends.
-- **🤖 BhashaAI Cultural Wisdom Chatbot (RAG + Dual Engine):**
+- **10 Supported Indian Languages:** Comprehensive native script support across Indo-Aryan, Dravidian, and Perso-Arabic language families.
+- **Frictionless Community Contributions:** Native speakers can contribute proverbs anonymously without mandatory logins or intrusive OAuth tracking.
+- **Advanced Search & Discovery:** Full-text search across original proverb text, English translations, and meanings, coupled with language and category filtering and sorting.
+- **Secure Maintainer Moderation Console:** Role-restricted portal for verifying submissions, editing metadata, rejecting spam with audit logs, and maintaining corpus integrity.
+- **Real-Time SQLite Analytics:** Dynamic metric cards and interactive Plotly visualizations tracking corpus growth, language distribution, and thematic trends.
+- **BhashaAI Cultural Wisdom Chatbot (RAG + Dual Engine):**
   - Interactive AI assistant grounded on the BhashaVerse verified corpus.
   - Answers questions about Indian folk sayings, philosophical meanings, and village folktales.
   - Provides cross-lingual proverb matching (e.g. matching a Telugu saying with its Hindi, Tamil, or English equivalent).
   - **Dual-Engine Architecture:** Integrates Gemini, Groq, or OpenAI when an API key is available, or runs **100% offline** via the built-in Native Corpus Engine without needing any API keys.
-- **📥 High-Fidelity Dataset Exports:**
+- **High-Fidelity Dataset Exports:**
   - **CSV Export:** Encoded with **UTF-8 with BOM (`utf-8-sig`)**, ensuring native Indian scripts (Devanagari, Telugu, Tamil, Bengali, Nastaliq, etc.) open properly in Microsoft Excel and data science libraries without character corruption.
   - **JSON Export:** Structured JSON with `ensure_ascii=False` and clean indentation for machine learning ingestion.
-- **🔒 Contributor Privacy Guaranteed:** Contributor emails are strictly shielded from public display and excluded from all public dataset downloads.
-- **⚡ Lightweight & Resilient:** Pure Python, SQLite with Write-Ahead Logging (WAL) and foreign keys, parameter-bound SQL queries preventing injection, and responsive CSS design.
+- **Contributor Privacy Guaranteed:** Contributor emails are strictly shielded from public display and excluded from all public dataset downloads.
+- **Lightweight & Resilient:** Pure Python, SQLite with Write-Ahead Logging (WAL) and foreign keys, parameter-bound SQL queries preventing injection, and responsive CSS design.
 
 ---
 

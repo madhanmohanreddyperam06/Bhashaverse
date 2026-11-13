@@ -27,7 +27,7 @@ def render_proverb_card(proverb_data: Dict[str, Any], show_actions: bool = False
         with col_meta:
             st.markdown(f":red[**{display_lang}**] &nbsp;·&nbsp; :gray[{category}]")
         with col_date:
-            st.caption(f"📅 {date_str}")
+            st.caption(date_str)
 
         # Proverb text
         if is_rtl(language):
@@ -40,12 +40,12 @@ def render_proverb_card(proverb_data: Dict[str, Any], show_actions: bool = False
             st.markdown(f'> *"{translation}"*')
 
         # Meaning
-        st.markdown(f"**💡 Meaning:** {meaning}")
+        st.markdown(f"**Meaning:** {meaning}")
 
         # Cultural Context
         if cultural_context:
-            with st.expander("🏛️ Cultural Context", expanded=False):
+            with st.expander("Cultural Context", expanded=False):
                 st.write(cultural_context)
 
         # Contributor Attribution
-        st.caption(f"👤 Contributed by **{contributor}**")
+        st.caption(f"Contributed by **{contributor}**")

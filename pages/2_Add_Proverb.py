@@ -7,7 +7,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Contribute a Proverb | Bhashaverse",
-    page_icon="✍️",
+    page_icon="📜",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -24,7 +24,7 @@ from components.sidebar import render_sidebar
 from components.footer import render_footer
 
 render_header(
-    title="✍️ Contribute a Proverb",
+    title="Contribute a Proverb",
     subtitle="Submit traditional folk sayings, idioms, and generational wisdom in regional scripts"
 )
 render_sidebar()
@@ -106,7 +106,7 @@ with st.container(border=True):
         )
 
         st.markdown("<br>", unsafe_allow_html=True)
-        submitted = st.form_submit_button("🚀 Submit Proverb for Review", type="primary", use_container_width=True)
+        submitted = st.form_submit_button("Submit Proverb for Review", type="primary", use_container_width=True)
 
 if submitted:
     submission_data = {
@@ -127,17 +127,17 @@ if submitted:
     )
 
     if not is_valid:
-        st.error(f"⚠️ {validation_result}")
+        st.error(validation_result)
     else:
         try:
             new_record = add_proverb(validation_result)
-            st.success("🎉 Thank you! Your proverb has been submitted successfully and is awaiting community review.")
+            st.success("Thank you! Your proverb has been submitted successfully and is awaiting community review.")
             with st.container(border=True):
                 st.subheader("Submission Receipt")
                 st.markdown(f"**UUID:** `{new_record.get('submission_uuid')}`")
                 st.markdown(f"**Language:** {new_record.get('language')} (`{new_record.get('language_code')}`)")
                 st.markdown(f"**Status:** :orange[Pending Review]")
         except Exception as e:
-            st.error(f"❌ Database error: {e}")
+            st.error(f"Database error: {e}")
 
 render_footer()

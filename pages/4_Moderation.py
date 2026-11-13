@@ -9,7 +9,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Moderation | Bhashaverse",
-    page_icon="🛡️",
+    page_icon="📜",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -42,7 +42,7 @@ from components.navbar import render_header
 from components.sidebar import render_sidebar
 from components.footer import render_footer
 
-render_header(title="🛡️ Moderation Console", badge_text="Restricted Access")
+render_header(title="Moderation Console", badge_text="Restricted Access")
 render_sidebar()
 
 # ==========================================
@@ -60,7 +60,7 @@ if not is_moderator_authenticated(st.session_state):
                     type="password",
                     placeholder="Enter maintainer key..."
                 )
-                submit_btn = st.form_submit_button("🔓 Unlock Console", type="primary", use_container_width=True)
+                submit_btn = st.form_submit_button("Unlock Console", type="primary", use_container_width=True)
 
                 if submit_btn:
                     if authenticate_moderator(st.session_state, passkey_input):
@@ -78,9 +78,9 @@ if not is_moderator_authenticated(st.session_state):
 # ==========================================
 top_col1, top_col2 = st.columns([0.8, 0.2])
 with top_col1:
-    st.markdown("🟢 **Maintainer Session Active** &nbsp;·&nbsp; Authorized for review, editing, and audits.")
+    st.markdown("**Maintainer Session Active** &nbsp;·&nbsp; Authorized for review, editing, and audits.")
 with top_col2:
-    if st.button("🚪 Log Out", use_container_width=True):
+    if st.button("Log Out", use_container_width=True):
         logout_moderator(st.session_state)
         st.rerun()
 
@@ -93,11 +93,11 @@ rejected_list = get_rejected_proverbs()
 logs_list = get_moderation_logs(limit=100)
 
 tab_pending, tab_approved, tab_rejected, tab_logs, tab_export = st.tabs([
-    f"📥 Pending Review ({len(pending_list)})",
-    f"✅ Approved Corpus ({len(approved_list)})",
-    f"❌ Rejected Archive ({len(rejected_list)})",
-    f"📋 Audit Logs ({len(logs_list)})",
-    "📦 Maintainer Export"
+    f"Pending Review ({len(pending_list)})",
+    f"Approved Corpus ({len(approved_list)})",
+    f"Rejected Archive ({len(rejected_list)})",
+    f"Audit Logs ({len(logs_list)})",
+    "Maintainer Export"
 ])
 
 # ==========================================
@@ -143,13 +143,13 @@ with tab_pending:
                 action_col1, action_col2, action_col3 = st.columns([1, 1, 1.2])
 
                 with action_col1:
-                    if st.button("✅ Approve", key=f"apprv_{p_id}", type="primary", use_container_width=True):
+                    if st.button("Approve", key=f"apprv_{p_id}", type="primary", use_container_width=True):
                         if approve_proverb(p_id, moderator="maintainer"):
                             st.success(f"Approved proverb #{p_id}")
                             st.rerun()
 
                 with action_col2:
-                    with st.popover("❌ Reject", use_container_width=True):
+                    with st.popover("Reject", use_container_width=True):
                         st.caption("Provide reason for rejection:")
                         reject_reason = st.text_input("Reason", placeholder="Duplicate, low quality, inappropriate...", key=f"rej_reason_{p_id}")
                         if st.button("Confirm Rejection", key=f"conf_rej_{p_id}", type="primary", use_container_width=True):
@@ -157,7 +157,7 @@ with tab_pending:
                                 st.rerun()
 
                 with action_col3:
-                    with st.popover("✏️ Edit & Approve", use_container_width=True):
+                    with st.popover("Edit & Approve", use_container_width=True):
                         st.caption("Correct text or category before publishing:")
                         edit_proverb = st.text_input("Proverb Text", value=p["proverb"], key=f"edt_prv_{p_id}")
                         edit_trans = st.text_input("Translation", value=p.get("english_translation") or "", key=f"edt_tr_{p_id}")
@@ -218,7 +218,7 @@ with tab_approved:
                                 options=CATEGORIES,
                                 index=CATEGORIES.index(item["category"]) if item["category"] in CATEGORIES else 0
                             )
-                            if st.form_submit_button("💾 Save Changes", type="primary"):
+                            if st.form_submit_button("Save Changes", type="primary"):
                                 update_proverb(
                                     proverb_id=i_id,
                                     proverb=e_text,
@@ -240,7 +240,7 @@ with tab_approved:
 
                             st.divider()
                             del_confirm = st.checkbox("Confirm deletion", key=f"del_chk_{i_id}")
-                            if st.button("🗑️ Delete Permanently", key=f"del_btn_{i_id}", disabled=not del_confirm, use_container_width=True):
+                            if st.button("Delete Permanently", key=f"del_btn_{i_id}", disabled=not del_confirm, use_container_width=True):
                                 delete_proverb(i_id, moderator="maintainer")
                                 st.rerun()
 
@@ -262,13 +262,13 @@ with tab_rejected:
 
                     col_rest, col_del = st.columns(2)
                     with col_rest:
-                        if st.button("🔄 Restore to Pending", key=f"rest_{r_id}", use_container_width=True):
+                        if st.button("Restore to Pending", key=f"rest_{r_id}", use_container_width=True):
                             restore_proverb_to_pending(r_id, moderator="maintainer", reason="Restored from archive")
                             st.rerun()
 
                     with col_del:
                         del_rej_chk = st.checkbox("Confirm permanent deletion", key=f"del_rej_chk_{r_id}")
-                        if st.button("🗑️ Delete", key=f"del_rej_{r_id}", disabled=not del_rej_chk, use_container_width=True):
+                        if st.button("Delete", key=f"del_rej_{r_id}", disabled=not del_rej_chk, use_container_width=True):
                             delete_proverb(r_id, moderator="maintainer")
                             st.rerun()
 
@@ -304,7 +304,7 @@ with tab_export:
     with col_m1:
         m_csv = generate_csv_export(all_data, is_maintainer=True)
         st.download_button(
-            label="📥 Download Complete CSV (with Audit Metadata)",
+            label="Download Complete CSV (with Audit Metadata)",
             data=m_csv,
             file_name=get_export_filename("bhashaverse_full", "csv"),
             mime="text/csv",
@@ -315,7 +315,7 @@ with tab_export:
     with col_m2:
         m_json = generate_json_export(all_data, is_maintainer=True)
         st.download_button(
-            label="📦 Download Complete JSON (with Audit Metadata)",
+            label="Download Complete JSON (with Audit Metadata)",
             data=m_json,
             file_name=get_export_filename("bhashaverse_full", "json"),
             mime="application/json",
