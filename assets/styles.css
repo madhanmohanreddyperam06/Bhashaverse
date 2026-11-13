@@ -30,11 +30,19 @@ html, body, [data-testid="stAppViewContainer"], .stApp {
     border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Main Container Spacing */
+/* Main Container Spacing - Fully Left to the Page */
 .stMainBlockContainer, [data-testid="stMainBlockContainer"], .block-container {
-    padding-top: 2rem !important;
+    padding-top: 1.5rem !important;
     padding-bottom: 6rem !important;
-    max-width: 1100px !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    max-width: 100% !important;
+}
+
+/* Heading and Caption Left-Alignment */
+h1, .stTitle, div[data-testid="stHeading"] {
+    text-align: left !important;
+    margin-left: 0 !important;
 }
 
 /* Native Container / Card Styling */
@@ -42,61 +50,6 @@ html, body, [data-testid="stAppViewContainer"], .stApp {
     border-radius: 10px !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
     background-color: #161B22 !important;
-}
-
-/* Professional Hero Card for Home Header */
-.bv-hero-card {
-    background-color: #161B22 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-left: 4px solid var(--bv-primary) !important;
-    border-radius: 10px !important;
-    padding: 1.1rem 1.4rem !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    margin-bottom: 1.5rem !important;
-}
-
-.bv-hero-left {
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.bv-hero-title {
-    font-size: 1.6rem !important;
-    font-weight: 800 !important;
-    color: #FAFAFA !important;
-    margin: 0 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.3px !important;
-}
-
-.bv-hero-subtitle {
-    font-size: 0.9rem !important;
-    color: #9E9E9E !important;
-    font-style: italic !important;
-    margin: 0.25rem 0 0 0 !important;
-    line-height: 1.3 !important;
-}
-
-.bv-hero-tag {
-    background: rgba(255, 75, 75, 0.12) !important;
-    color: #FF4B4B !important;
-    border: 1px solid rgba(255, 75, 75, 0.25) !important;
-    padding: 0.25rem 0.75rem !important;
-    border-radius: 20px !important;
-    font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    white-space: nowrap !important;
-    letter-spacing: 0.3px !important;
-}
-
-@media (max-width: 768px) {
-    .bv-hero-card {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.6rem !important;
-    }
 }
 
 /* Urdu / Arabic RTL Typography */

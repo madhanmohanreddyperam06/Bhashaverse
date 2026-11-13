@@ -8,7 +8,7 @@ st.set_page_config(
     page_title="Bhashaverse",
     page_icon="📜",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 from config import APP_NAME, APP_TAGLINE
@@ -26,21 +26,9 @@ sidebar_settings = render_sidebar(is_chatbot_page=True)
 # Load theme CSS
 load_css()
 
-# Professional Hero Card for Header & Sub-header
-st.markdown(
-    f"""
-    <div class="bv-hero-card">
-        <div class="bv-hero-left">
-            <div class="bv-hero-title">📜 {APP_NAME}</div>
-            <div class="bv-hero-subtitle">"{APP_TAGLINE}"</div>
-        </div>
-        <div class="bv-hero-right">
-            <span class="bv-hero-tag">10 Regional Languages</span>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Heading & sub-heading fully left to the page (No Card)
+st.title(f"📜 {APP_NAME}")
+st.caption(f'"{APP_TAGLINE}"')
 
 # Chat Session State (Empty by default - no placeholder messages)
 if "chat_messages" not in st.session_state:
