@@ -96,7 +96,6 @@ Contributions can be categorized into 11 themes:
 Bhashaverse/
 │
 ├── run.py                      # Multi-process launcher (concurrent or independent)
-├── app.py                      # Root entrypoint delegate (forwards to Frontend/app.py)
 ├── requirements.txt            # Python dependencies (FastAPI, Uvicorn, Streamlit, etc.)
 ├── README.md                   # Complete documentation
 │
@@ -271,7 +270,7 @@ python run.py frontend   # Starts only Streamlit on port 8501
 ## Moderation Workflow
 
 1. **Submission:** A contributor submits a proverb via the **Contribute** form. It is assigned a tracking UUID and stored in SQLite with `status = 'pending'`.
-2. **Access Control:** The **Moderation Console** (`pages/4_Moderation.py`) requires a maintainer passkey (`MODERATOR_KEY`) verified via constant-time comparison (`hmac.compare_digest`).
+2. **Access Control:** The **Moderation Console** (`Frontend/pages/4_Moderation.py`) requires a maintainer passkey (`MODERATOR_KEY`) verified via constant-time comparison (`hmac.compare_digest`).
 3. **Review Actions:**
    - **Approve:** Moves the submission to `approved`. The proverb immediately becomes publicly visible on the Explore page and included in dataset exports.
    - **Edit & Approve:** Corrects typos in native scripts or refines translations before approving.
@@ -283,7 +282,7 @@ python run.py frontend   # Starts only Streamlit on port 8501
 
 ## Dataset Exports for NLP & AI Research
 
-Researchers and data scientists can download the verified corpus directly from the **Dashboard** (`pages/3_Dashboard.py`):
+Researchers and data scientists can download the verified corpus directly from the **Dashboard** (`Frontend/pages/3_Dashboard.py`):
 
 - **CSV Download:** Generated using Python's `utf-8-sig` encoding (UTF-8 with Byte Order Mark). This prevents script corruption when opened in spreadsheet software like Microsoft Excel while remaining clean for Pandas `pd.read_csv()`.
 - **JSON Download:** Generated with `json.dumps(data, ensure_ascii=False, indent=2)`, preserving all native characters unescaped.
@@ -297,7 +296,7 @@ Researchers and data scientists can download the verified corpus directly from t
 
 1. Push your repository to GitHub.
 2. Visit [share.streamlit.io](https://share.streamlit.io/) and create a new app.
-3. Select your repository, branch (`main`), and set the main file path to `app.py`.
+3. Select your repository, branch (`main`), and set the main file path to `Frontend/app.py`.
 4. In the App Settings under **Secrets**, add your maintainer key:
    ```toml
    MODERATOR_KEY = "your_strong_secret_key"
