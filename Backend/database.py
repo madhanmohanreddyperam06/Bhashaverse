@@ -10,7 +10,7 @@ import uuid
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Generator, List, Optional, Tuple, Union
+from typing import Any, Dict, Generator, List, Optional, Set, Tuple, Union
 
 from Backend.config import (
     DEFAULT_DB_PATH,
@@ -21,64 +21,7 @@ from Backend.config import (
 )
 
 # ==========================================
-# Connection & Pragma Management
-# ==========================================
-
-def get_db_path(db_path: Optional[Union[str, Path]] = None) -> Path:
-    """Resolve and ensure the database file path."""
-    if db_path is None:
-        target = DEFAULT_DB_PATH
-    else:
-        target = Path(db_path)
-    if str(target) != ":memory:":
-        target.parent.mkdir(parents=True, exist_ok=True)
-    return target
-
-
-@contextmanager
-def get_connection(
-    db_path: Optional[Union[str, Path]] = None,
-    timeout: float = 20.0,
-) -> Generator[sqlite3.Connection, None, None]:
-    """
-    Context manager providing a managed SQLite connection.
-    Enforces foreign keys, row dict factories, and transactional commits.
-    """
-    resolved_path = get_db_path(db_path)
-    conn = sqlite3.connect(
-        str(resolved_path),
-        timeout=timeout,
-        detect_types=sqlite3.PARSE_DECLTYPES,
-    )
-    conn.row_factory = sqlite3.Row
-    try:
-        # Enforce foreign keys and performance settings
-        conn.execute("PRAGMA foreign_keys = ON;")
-        if str(resolved_path) != ":memory:":
-            try:
-                conn.execute("PRAGMA journal_mode = WAL;")
-                conn.execute("PRAGMA synchronous = NORMAL;")
-            except sqlite3.DatabaseError:
-                pass
-        yield conn
-    finally:
-        conn.close()
-
-
-def row_to_dict(row: Optional[sqlite3.Row]) -> Optional[Dict[str, Any]]:
-    """Convert a sqlite3.Row into a standard Python dict."""
-    if row is None:
-        return None
-    return dict(row)
-
-
-def rows_to_dicts(rows: List[sqlite3.Row]) -> List[Dict[str, Any]]:
-    """Convert a list of sqlite3.Row objects into a list of dicts."""
-    return [dict(r) for r in rows]
-
-
-# ==========================================
-# Schema Initialization
+# Schema Definitions
 # ==========================================
 
 PROVERBS_TABLE_SQL = """
@@ -124,6 +67,89 @@ INDEXES_SQL = [
     "CREATE INDEX IF NOT EXISTS idx_moderation_logs_proverb_id ON moderation_logs(proverb_id);",
 ]
 
+# Track database paths that have verified schema
+_schema_initialized: Set[str] = set()
+_is_initializing: bool = False
+
+# ==========================================
+# Connection & Pragma Management
+# ==========================================
+
+def get_db_path(db_path: Optional[Union[str, Path]] = None) -> Path:
+    """Resolve and ensure the database file path."""
+    if db_path is None:
+        target = DEFAULT_DB_PATH
+    else:
+        target = Path(db_path)
+    if str(target) != ":memory:":
+        target.parent.mkdir(parents=True, exist_ok=True)
+    return target
+
+
+@contextmanager
+def get_connection(
+    db_path: Optional[Union[str, Path]] = None,
+    timeout: float = 20.0,
+) -> Generator[sqlite3.Connection, None, None]:
+    """
+    Context manager providing a managed SQLite connection.
+    Enforces foreign keys, row dict factories, and transactional commits.
+    Automatically checks and creates missing tables and default seed data
+    if running against a fresh database (crucial for containerized and cloud deployments).
+    """
+    global _is_initializing
+    resolved_path = get_db_path(db_path)
+    conn = sqlite3.connect(
+        str(resolved_path),
+        timeout=timeout,
+        detect_types=sqlite3.PARSE_DECLTYPES,
+    )
+    conn.row_factory = sqlite3.Row
+    try:
+        # Enforce foreign keys and performance settings
+        conn.execute("PRAGMA foreign_keys = ON;")
+        if str(resolved_path) != ":memory:":
+            try:
+                conn.execute("PRAGMA journal_mode = WAL;")
+                conn.execute("PRAGMA synchronous = NORMAL;")
+            except sqlite3.DatabaseError:
+                pass
+
+        # Auto-ensure database schema if uninitialized (e.g. fresh cloud deploy)
+        path_key = str(resolved_path)
+        if not _is_initializing and path_key != ":memory:" and path_key not in _schema_initialized:
+            cur = conn.cursor()
+            cur.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='proverbs' LIMIT 1;")
+            if cur.fetchone() is None:
+                # Table does not exist: create tables and seed defaults
+                with conn:
+                    conn.execute(PROVERBS_TABLE_SQL)
+                    conn.execute(MODERATION_LOGS_TABLE_SQL)
+                    for idx_stmt in INDEXES_SQL:
+                        conn.execute(idx_stmt)
+                _is_initializing = True
+                try:
+                    seed_default_proverbs(resolved_path)
+                finally:
+                    _is_initializing = False
+            _schema_initialized.add(path_key)
+
+        yield conn
+    finally:
+        conn.close()
+
+
+def row_to_dict(row: Optional[sqlite3.Row]) -> Optional[Dict[str, Any]]:
+    """Convert a sqlite3.Row into a standard Python dict."""
+    if row is None:
+        return None
+    return dict(row)
+
+
+def rows_to_dicts(rows: List[sqlite3.Row]) -> List[Dict[str, Any]]:
+    """Convert a list of sqlite3.Row objects into a list of dicts."""
+    return [dict(r) for r in rows]
+
 
 def init_db(
     db_path: Optional[Union[str, Path]] = None,
@@ -134,18 +160,49 @@ def init_db(
     Initialize SQLite database schema and indexes.
     Optionally seeds curated high-quality proverbs if table is empty.
     """
+    global _is_initializing
     if seed_defaults is not None:
         seed_if_empty = seed_defaults
 
-    with get_connection(db_path) as conn:
-        with conn:
-            conn.execute(PROVERBS_TABLE_SQL)
-            conn.execute(MODERATION_LOGS_TABLE_SQL)
-            for idx_stmt in INDEXES_SQL:
-                conn.execute(idx_stmt)
+    resolved_path = get_db_path(db_path)
+    _is_initializing = True
+    try:
+        with get_connection(resolved_path) as conn:
+            with conn:
+                conn.execute(PROVERBS_TABLE_SQL)
+                conn.execute(MODERATION_LOGS_TABLE_SQL)
+                for idx_stmt in INDEXES_SQL:
+                    conn.execute(idx_stmt)
 
-    if seed_if_empty:
-        seed_default_proverbs(db_path)
+        if seed_if_empty:
+            seed_default_proverbs(resolved_path)
+
+        _schema_initialized.add(str(resolved_path))
+    finally:
+        _is_initializing = False
+
+
+def ensure_db_initialized(
+    db_path: Optional[Union[str, Path]] = None,
+    seed_if_empty: bool = True,
+) -> None:
+    """
+    Verifies that the database schema exists. If tables are missing (e.g., in a
+    fresh container or cloud deployment where .db is not committed), initializes
+    the schema and seeds default curated proverbs automatically.
+    """
+    resolved_path = get_db_path(db_path)
+    path_key = str(resolved_path)
+    if path_key in _schema_initialized:
+        return
+
+    with get_connection(resolved_path) as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='proverbs' LIMIT 1;")
+        if cur.fetchone() is None:
+            init_db(db_path=resolved_path, seed_if_empty=seed_if_empty)
+        else:
+            _schema_initialized.add(path_key)
 
 
 # ==========================================

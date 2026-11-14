@@ -19,6 +19,12 @@ class BhashaverseAPIClient:
 
     def __init__(self, base_url: str = API_BASE_URL):
         self.base_url = base_url.rstrip("/")
+        # Proactively ensure local SQLite database is ready if running standalone
+        try:
+            from Backend.database import ensure_db_initialized
+            ensure_db_initialized()
+        except Exception:
+            pass
 
     # -------------------------------------------------------------
     # System & Health

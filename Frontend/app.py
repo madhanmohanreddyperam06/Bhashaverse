@@ -15,6 +15,13 @@ st.set_page_config(
 # Apply Windows asyncio silence patch immediately
 import Frontend.utils.windows_patch  # Suppress harmless Windows asyncio WinError 10054 on browser disconnect
 
+# Ensure SQLite schema and seed proverbs exist on startup (critical for fresh container/cloud deployments)
+try:
+    from Backend.database import ensure_db_initialized
+    ensure_db_initialized()
+except Exception:
+    pass
+
 from Frontend.config import APP_NAME, APP_TAGLINE
 from Frontend.api_client import api_client
 from Frontend.components.navbar import load_css

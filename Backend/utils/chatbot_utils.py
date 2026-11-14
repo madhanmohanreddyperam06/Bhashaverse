@@ -53,6 +53,12 @@ def get_relevant_proverbs_context(
     Search SQLite corpus for proverbs semantically or lexically matching the query.
     Used to ground both LLM prompt context and the offline engine.
     """
+    try:
+        from Backend.database import ensure_db_initialized
+        ensure_db_initialized(db_path)
+    except Exception:
+        pass
+
     detected_lang = language_filter or detect_mentioned_language(query)
     lang_param = detected_lang if detected_lang and detected_lang != "All" else None
 
