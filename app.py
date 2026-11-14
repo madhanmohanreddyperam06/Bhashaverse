@@ -2,6 +2,7 @@
 Bhashaverse - Cultural Wisdom AI Platform
 """
 
+import utils.windows_patch  # Suppress harmless Windows asyncio WinError 10054 on browser disconnect
 import streamlit as st
 
 st.set_page_config(

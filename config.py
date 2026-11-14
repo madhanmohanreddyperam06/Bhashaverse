@@ -6,6 +6,7 @@ Provides application settings, supported languages metadata, categories, paths, 
 from pathlib import Path
 import os
 from typing import Dict, Any, List, Optional
+import utils.windows_patch  # Suppress harmless Windows asyncio WinError 10054 on browser disconnect
 
 # Base Directories
 BASE_DIR = Path(__file__).resolve().parent
