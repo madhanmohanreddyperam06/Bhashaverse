@@ -43,7 +43,7 @@ def start_frontend():
         "-m",
         "streamlit",
         "run",
-        "Frontend/app.py",
+        "app.py",
         "--server.port",
         "8501",
         "--server.headless",
