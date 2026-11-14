@@ -42,3 +42,4 @@ def apply_windows_asyncio_fix() -> None:
 
 # Apply automatically upon module import
 apply_windows_asyncio_fix()
+
