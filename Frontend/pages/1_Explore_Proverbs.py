@@ -147,3 +147,4 @@ if proverbs:
                 st.rerun()
 else:
     st.info("No proverbs match your criteria. Try adjusting your search query or language filter.")
+

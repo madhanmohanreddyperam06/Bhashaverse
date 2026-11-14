@@ -26,3 +26,4 @@ def get_analytics_stats():
         category_counts=stats.get("category_distribution", {}),
         recent_approved=stats.get("recent_proverbs", []),
     )
+

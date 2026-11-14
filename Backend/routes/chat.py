@@ -29,3 +29,4 @@ def chat_endpoint(request: ChatRequest):
         language_filter=request.language_filter,
         engine_used=request.engine_choice or "Auto-Detect",
     )
+

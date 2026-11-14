@@ -92,3 +92,4 @@ def get_all_language_names() -> List[str]:
 def get_language_dropdown_options() -> List[str]:
     """List of language options for dropdown menus."""
     return [lang["name"] for lang in SUPPORTED_LANGUAGES]
+

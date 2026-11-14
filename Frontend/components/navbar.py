@@ -41,3 +41,4 @@ def render_header(title: str, subtitle: str = "", badge_text: str = "") -> None:
         st.caption(subtitle)
 
     st.divider()
+

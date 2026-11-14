@@ -487,3 +487,4 @@ class BhashaverseAPIClient:
 
 # Singleton instance for easy import across Frontend
 api_client = BhashaverseAPIClient()
+

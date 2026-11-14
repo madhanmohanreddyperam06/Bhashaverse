@@ -137,3 +137,4 @@ CATEGORIES: List[str] = [
 ]
 
 DEFAULT_PAGE_SIZE = 12
+

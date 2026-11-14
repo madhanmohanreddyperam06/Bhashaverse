@@ -62,3 +62,4 @@ if user_query:
             st.markdown(response_text)
 
     st.session_state["chat_messages"].append({"role": "assistant", "content": response_text})
+

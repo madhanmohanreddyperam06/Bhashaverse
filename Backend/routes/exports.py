@@ -77,3 +77,4 @@ def download_maintainer_json():
         media_type="application/json; charset=utf-8",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'}
     )
+

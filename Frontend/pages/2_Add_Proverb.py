@@ -132,3 +132,4 @@ if submitted:
             st.markdown(f"**UUID:** `{new_record.get('submission_uuid', 'Recorded')}`")
             st.markdown(f"**Language:** {new_record.get('language', selected_language)} (`{new_record.get('language_code', '')}`)")
             st.markdown("**Status:** :orange[Pending Review]")
+

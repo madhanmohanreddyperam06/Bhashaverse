@@ -140,3 +140,4 @@ def validate_proverb_submission(
     }
 
     return True, cleaned_data
+

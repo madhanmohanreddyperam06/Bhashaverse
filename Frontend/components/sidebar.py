@@ -87,3 +87,4 @@ def render_sidebar(is_chatbot_page: bool = False) -> Dict[str, Any]:
         st.caption("Designed & Developed by Madhan Mohan Reddy Peram")
 
     return chatbot_settings
+

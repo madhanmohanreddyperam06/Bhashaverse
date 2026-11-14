@@ -91,3 +91,4 @@ def submit_proverb(submission: ProverbCreate):
         )
 
     return created_record
+

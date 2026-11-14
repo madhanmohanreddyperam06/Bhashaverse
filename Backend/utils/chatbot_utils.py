@@ -356,3 +356,4 @@ def generate_chat_response(
 
     # If no API key is available, use the high-quality Offline Engine
     return generate_offline_response(query, context_proverbs, language_filter)
+

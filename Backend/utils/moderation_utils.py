@@ -39,3 +39,4 @@ def authenticate_moderator(session_state: Any, provided_key: str) -> bool:
 def logout_moderator(session_state: Any) -> None:
     """Clear moderator authentication from session state."""
     session_state["is_moderator_authenticated"] = False
+

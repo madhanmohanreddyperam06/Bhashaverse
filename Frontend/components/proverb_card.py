@@ -49,3 +49,4 @@ def render_proverb_card(proverb_data: Dict[str, Any], show_actions: bool = False
 
         # Contributor Attribution
         st.caption(f"Contributed by **{contributor}**")
+

@@ -45,3 +45,4 @@ def get_display_label(lang_name: str) -> str:
     if info:
         return info.get("display_label", lang_name)
     return lang_name
+

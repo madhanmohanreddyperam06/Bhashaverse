@@ -183,3 +183,4 @@ def delete_submission(
             detail=f"Proverb with ID {proverb_id} could not be deleted."
         )
     return {"message": f"Proverb {proverb_id} permanently deleted."}
+

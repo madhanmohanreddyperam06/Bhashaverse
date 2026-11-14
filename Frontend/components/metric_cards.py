@@ -31,3 +31,4 @@ def render_metric_cards(stats: Dict[str, Any]) -> None:
     with col4:
         with st.container(border=True):
             st.metric(label="Total Submissions", value=f"{total_all:,}")
+

@@ -36,3 +36,4 @@ def truncate_text(text: Optional[str], max_chars: int = 150) -> str:
     if len(text) <= max_chars:
         return text
     return text[:max_chars].rstrip() + "..."
+

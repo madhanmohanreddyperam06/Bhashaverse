@@ -28,7 +28,9 @@ def start_backend():
         "127.0.0.1",
         "--port",
         "8000",
-        "--reload"
+        "--reload",
+        "--reload-dir",
+        "Backend"
     ]
     return subprocess.Popen(cmd)
 
@@ -100,3 +102,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
