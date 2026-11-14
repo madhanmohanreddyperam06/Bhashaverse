@@ -12,3 +12,4 @@ if str(BASE_DIR) not in sys.path:
 target = BASE_DIR / "Frontend" / "pages" / "3_Dashboard.py"
 with open(target, "r", encoding="utf-8") as f:
     exec(compile(f.read(), str(target), "exec"), globals())
+
