@@ -213,32 +213,41 @@ def get_configured_api_keys() -> Dict[str, Optional[str]]:
 
 def call_gemini_api(api_key: str, system_prompt: str, user_prompt: str) -> str:
     """Call Google Gemini API via official google-genai SDK or REST API."""
+    # 1. Try official google-genai SDK
     try:
         from google import genai
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-2.0-flash",
             contents=f"{system_prompt}\n\nUser Question: {user_prompt}",
         )
         if response and hasattr(response, "text") and response.text:
             return response.text
     except Exception:
-        import requests
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
-        payload = {
-            "contents": [
-                {
-                    "parts": [
-                        {"text": f"{system_prompt}\n\nUser Question: {user_prompt}"}
-                    ]
-                }
-            ]
-        }
-        resp = requests.post(url, json=payload, timeout=25)
-        if resp.status_code == 200:
-            data = resp.json()
-            return data["candidates"][0]["content"]["parts"][0]["text"]
-        raise RuntimeError(f"Gemini API returned HTTP {resp.status_code}: {resp.text}")
+        pass
+
+    # 2. Try REST API with standard models
+    import requests
+    for model_name in ["gemini-2.0-flash", "gemini-1.5-flash"]:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+            payload = {
+                "contents": [
+                    {
+                        "parts": [
+                            {"text": f"{system_prompt}\n\nUser Question: {user_prompt}"}
+                        ]
+                    }
+                ]
+            }
+            resp = requests.post(url, json=payload, timeout=20)
+            if resp.status_code == 200:
+                data = resp.json()
+                return data["candidates"][0]["content"]["parts"][0]["text"]
+        except Exception:
+            continue
+
+    raise RuntimeError("Google Gemini API is temporarily unavailable.")
 
 
 def call_groq_api(api_key: str, system_prompt: str, user_prompt: str) -> str:
@@ -343,11 +352,12 @@ def generate_chat_response(
             return call_groq_api(api_keys["groq"], system_prompt, query)
         elif (engine_choice in ["Auto-Detect", "OpenAI"]) and api_keys.get("openai"):
             return call_openai_api(api_keys["openai"], system_prompt, query)
-    except Exception as e:
+    except Exception:
+        # Graceful fallback to offline engine if external LLM encounters any issue
         offline_res = generate_offline_response(query, context_proverbs, language_filter)
         return (
-            f"*(Note: External LLM request encountered an issue [{e}]. "
-            f"Switched to BhashaVerse Native Corpus Engine)*\n\n" + offline_res
+            "💡 *Note: External AI is currently unreachable. Showing verified results from Bhashaverse's local cultural knowledge engine:*\n\n"
+            + offline_res
         )
 
     # If no API key is available, use the high-quality Offline Engine
