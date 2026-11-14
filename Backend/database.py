@@ -12,22 +12,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
-try:
-    from Backend.config import (
-        DEFAULT_DB_PATH,
-        LANGUAGE_MAP_BY_NAME,
-        STATUS_APPROVED,
-        STATUS_PENDING,
-        STATUS_REJECTED,
-    )
-except ImportError:
-    from config import (
-        DEFAULT_DB_PATH,
-        LANGUAGE_MAP_BY_NAME,
-        STATUS_APPROVED,
-        STATUS_PENDING,
-        STATUS_REJECTED,
-    )
+from Backend.config import (
+    DEFAULT_DB_PATH,
+    LANGUAGE_MAP_BY_NAME,
+    STATUS_APPROVED,
+    STATUS_PENDING,
+    STATUS_REJECTED,
+)
 
 # ==========================================
 # Connection & Pragma Management

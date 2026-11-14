@@ -9,17 +9,12 @@ from Frontend.config import FRONTEND_DIR, BASE_DIR, APP_NAME, APP_TAGLINE
 
 
 def load_css() -> None:
-    """Read and inject assets/styles.css into the Streamlit app."""
-    candidates = [
-        FRONTEND_DIR / "assets" / "styles.css",
-        BASE_DIR / "assets" / "styles.css",
-    ]
-    for css_path in candidates:
-        if css_path.exists():
-            with open(css_path, "r", encoding="utf-8") as f:
-                css_content = f.read()
-            st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
-            return
+    """Read and inject Frontend/assets/styles.css into the Streamlit app."""
+    css_path = FRONTEND_DIR / "assets" / "styles.css"
+    if css_path.exists():
+        with open(css_path, "r", encoding="utf-8") as f:
+            css_content = f.read()
+        st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
 
 
 def render_header(title: str, subtitle: str = "", badge_text: str = "") -> None:

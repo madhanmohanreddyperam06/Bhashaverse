@@ -5,7 +5,7 @@ and preservation of Indian regional scripts.
 """
 
 import json
-from utils.export_utils import (
+from Backend.utils.export_utils import (
     generate_csv_export,
     generate_json_export,
     sanitize_records_for_public,

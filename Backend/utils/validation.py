@@ -9,34 +9,19 @@ import re
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple, Union
 
-try:
-    from Backend.config import (
-        CATEGORIES,
-        CONTEXT_MAX_LEN,
-        EMAIL_MAX_LEN,
-        LANGUAGE_NAMES,
-        MEANING_MAX_LEN,
-        MEANING_MIN_LEN,
-        NAME_MAX_LEN,
-        PROVERB_MAX_LEN,
-        PROVERB_MIN_LEN,
-        TRANSLATION_MAX_LEN,
-    )
-    from Backend.database import check_duplicate_proverb
-except ImportError:
-    from config import (
-        CATEGORIES,
-        CONTEXT_MAX_LEN,
-        EMAIL_MAX_LEN,
-        LANGUAGE_NAMES,
-        MEANING_MAX_LEN,
-        MEANING_MIN_LEN,
-        NAME_MAX_LEN,
-        PROVERB_MAX_LEN,
-        PROVERB_MIN_LEN,
-        TRANSLATION_MAX_LEN,
-    )
-    from database import check_duplicate_proverb
+from Backend.config import (
+    CATEGORIES,
+    CONTEXT_MAX_LEN,
+    EMAIL_MAX_LEN,
+    LANGUAGE_NAMES,
+    MEANING_MAX_LEN,
+    MEANING_MIN_LEN,
+    NAME_MAX_LEN,
+    PROVERB_MAX_LEN,
+    PROVERB_MIN_LEN,
+    TRANSLATION_MAX_LEN,
+)
+from Backend.database import check_duplicate_proverb
 
 
 EMAIL_REGEX = re.compile(r"^[\w\.\+\-]+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+$")

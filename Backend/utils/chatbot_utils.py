@@ -9,12 +9,8 @@ import os
 import re
 from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
-try:
-    from Backend.config import SUPPORTED_LANGUAGES, LANGUAGE_NAMES, LANGUAGE_BY_NAME
-    from Backend.database import search_proverbs, get_approved_proverbs
-except ImportError:
-    from config import SUPPORTED_LANGUAGES, LANGUAGE_NAMES, LANGUAGE_BY_NAME
-    from database import search_proverbs, get_approved_proverbs
+from Backend.config import SUPPORTED_LANGUAGES, LANGUAGE_NAMES, LANGUAGE_BY_NAME
+from Backend.database import search_proverbs, get_approved_proverbs
 
 
 # ==========================================

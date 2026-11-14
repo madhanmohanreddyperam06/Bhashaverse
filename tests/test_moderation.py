@@ -3,13 +3,13 @@ Tests for BhashaVerse 2.0 Moderation Access Control and Utilities.
 Verifies constant-time key validation, session state management, and unauthorized protection.
 """
 
-from utils.moderation_utils import (
+from Backend.utils.moderation_utils import (
     verify_moderator_key,
     is_moderator_authenticated,
     authenticate_moderator,
     logout_moderator
 )
-from config import get_moderator_key
+from Backend.config import get_moderator_key
 
 
 def test_verify_moderator_key():

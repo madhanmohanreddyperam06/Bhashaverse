@@ -8,8 +8,8 @@ import tempfile
 from pathlib import Path
 import pytest
 
-from database import init_db, add_proverb, STATUS_APPROVED
-from utils.chatbot_utils import (
+from Backend.database import init_db, add_proverb, STATUS_APPROVED
+from Backend.utils.chatbot_utils import (
     extract_keywords,
     detect_mentioned_language,
     get_relevant_proverbs_context,

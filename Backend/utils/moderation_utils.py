@@ -6,10 +6,7 @@ Provides secure moderator passkey verification using constant-time comparison.
 from typing import Any
 import hmac
 
-try:
-    from Backend.config import get_moderator_key
-except ImportError:
-    from config import get_moderator_key
+from Backend.config import get_moderator_key
 
 
 def verify_moderator_key(provided_key: str) -> bool:

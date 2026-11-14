@@ -9,7 +9,7 @@ import tempfile
 from pathlib import Path
 import pytest
 
-from database import (
+from Backend.database import (
     init_db,
     add_proverb,
     check_duplicate_proverb,
@@ -31,7 +31,7 @@ from database import (
     STATUS_PENDING,
     STATUS_REJECTED,
 )
-from config import SUPPORTED_LANGUAGES
+from Backend.config import SUPPORTED_LANGUAGES
 
 
 @pytest.fixture

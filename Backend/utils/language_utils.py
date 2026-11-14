@@ -6,20 +6,12 @@ and language metadata helpers.
 
 from typing import Dict, Any, Optional, List
 
-try:
-    from Backend.config import (
-        SUPPORTED_LANGUAGES,
-        LANGUAGE_BY_NAME,
-        LANGUAGE_BY_CODE,
-        LANGUAGE_NAMES,
-    )
-except ImportError:
-    from config import (
-        SUPPORTED_LANGUAGES,
-        LANGUAGE_BY_NAME,
-        LANGUAGE_BY_CODE,
-        LANGUAGE_NAMES,
-    )
+from Backend.config import (
+    SUPPORTED_LANGUAGES,
+    LANGUAGE_BY_NAME,
+    LANGUAGE_BY_CODE,
+    LANGUAGE_NAMES,
+)
 
 
 # Unicode script code point blocks for supported Indian languages

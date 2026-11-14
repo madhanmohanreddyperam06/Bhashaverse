@@ -3,7 +3,7 @@ Tests for BhashaVerse 2.0 Validation Logic.
 Verifies required fields, constraints, email formats, categories, and permission checks.
 """
 
-from utils.validation import validate_proverb_submission, validate_email_format
+from Backend.utils.validation import validate_proverb_submission, validate_email_format
 
 
 def test_validate_email_format():
