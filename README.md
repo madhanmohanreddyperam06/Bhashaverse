@@ -104,16 +104,14 @@ BhashaVerse/
 │   ├── 2_Add_Proverb.py        # Proverb submission form with validation & duplicate detection
 │   ├── 3_Dashboard.py          # Real-time analytics charts and open research dataset downloads
 │   ├── 4_Moderation.py         # Passkey-restricted maintainer review, audit logs & actions
-│   ├── 5_About.py              # Mission, NLP significance, and open-source contribution guide
-│   └── 6_BhashaAI_Chatbot.py   # Interactive AI Wisdom Chatbot with RAG & dual-engine inference
+│   └── 5_About.py              # Mission, NLP significance, and open-source contribution guide
 │
 ├── components/
 │   ├── __init__.py
 │   ├── navbar.py               # Custom header renderer and CSS injector
 │   ├── sidebar.py              # Brand identity, live counts, language pills & session status
 │   ├── proverb_card.py         # Cultural proverb card with native font and RTL support
-│   ├── metric_cards.py         # Live metric KPI summary blocks
-│   └── footer.py               # Standardized open-source footer
+│   └── metric_cards.py         # Live metric KPI summary blocks
 │
 ├── utils/
 │   ├── __init__.py
@@ -122,10 +120,10 @@ BhashaVerse/
 │   ├── validation.py           # Form inputs validation, lengths, email check & duplicate check
 │   ├── export_utils.py         # UTF-8 BOM CSV & indented JSON generator with privacy scrubbing
 │   ├── moderation_utils.py     # Timing-attack resistant passkey verification and session management
-│   └── formatting.py           # Safe HTML escaping, ISO date formatting, and text truncation
+│   ├── formatting.py           # Safe HTML escaping, ISO date formatting, and text truncation
+│   └── windows_patch.py        # Windows asyncio socket disconnect silence handler
 │
 ├── assets/
-│   ├── logo.png                # Platform logo
 │   └── styles.css              # Custom responsive stylesheet & typography
 │
 ├── data/
