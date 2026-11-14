@@ -43,7 +43,7 @@ BhashaVerse bridges this gap by creating a human-verified, structured, multiling
 
 BhashaVerse supports 10 major Indian regional languages with complete native script typography and text direction:
 
-| # | Language | Native Script | Code | Script Family | Text Direction | Sample Proverb |
+| No | Language | Native Script | Code | Script Family | Text Direction | Sample Proverb |
 |---|----------|---------------|------|---------------|----------------|----------------|
 | 1 | **Hindi** | हिन्दी | `hi` | Devanagari | LTR | *अधजल गगरी छलकत जाए।* |
 | 2 | **Telugu** | తెలుగు | `te` | Telugu | LTR | *అడుసు తొక్కనేల కాలు కడగనేల.* |
