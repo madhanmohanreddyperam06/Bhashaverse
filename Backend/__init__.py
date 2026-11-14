@@ -1,0 +1,3 @@
+"""
+Bhashaverse - FastAPI Backend Package
+"""

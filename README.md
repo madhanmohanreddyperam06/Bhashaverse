@@ -2,9 +2,11 @@
  Preserving Languages. Connecting Cultures. Empowering AI
 
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Ollama](https://img.shields.io/badge/Ollama-black?logo=ollama&logoColor=white)](https://ollama.ai/)
 [![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 
 ## Project Overview
@@ -76,12 +78,14 @@ Contributions can be categorized into 11 themes:
 ## Technology Stack
 
 - **Python:** Core programming language (v3.10+)
+- **FastAPI:** High-performance RESTful API backend (`/api`) with interactive Swagger docs (`/docs`)
+- **Uvicorn:** Lightning-fast ASGI web server implementation
 - **Streamlit:** Modern web application and user interface framework (v1.30+)
 - **Ollama:** Local AI model orchestration and LLM inference engine
 - **SQLite:** Embedded transactional database with WAL mode and foreign key enforcement
-- **Styling:** Custom CSS (`assets/styles.css`) in dark mode
+- **Styling:** Custom CSS (`Frontend/assets/styles.css`) in permanent dark theme with Times New Roman typography
 - **Data Analysis & Visualization:** [Pandas](https://pandas.pydata.org/) and [Plotly Express](https://plotly.com/python/)
-- **Testing:** [pytest](https://docs.pytest.org/) with isolated temporary test databases
+- **Testing:** [pytest](https://docs.pytest.org/) with FastAPI `TestClient`
 - **License:** Open-source under the [MIT License](https://opensource.org/licenses/MIT)
 
 ---
@@ -89,53 +93,64 @@ Contributions can be categorized into 11 themes:
 ## Project Architecture
 
 ```text
-BhashaVerse/
+Bhashaverse/
 │
-├── app.py                      # Home / Landing page with live metrics & language showcase
-├── database.py                 # SQLite database engine, WAL mode, CRUD, search & exports
-├── config.py                   # Centralized configuration, language metadata & constraints
-├── requirements.txt            # Python dependencies
+├── run.py                      # Multi-process launcher (concurrent or independent)
+├── app.py                      # Root entrypoint delegate (forwards to Frontend/app.py)
+├── requirements.txt            # Python dependencies (FastAPI, Uvicorn, Streamlit, etc.)
 ├── README.md                   # Complete documentation
-├── .gitignore                  # Git exclusions (bytecode, SQLite databases, secrets)
-├── .env.example                # Template for environment configuration
 │
-├── pages/
-│   ├── 1_Explore_Proverbs.py   # Corpus search, language/category filters, card view & export
-│   ├── 2_Add_Proverb.py        # Proverb submission form with validation & duplicate detection
-│   ├── 3_Dashboard.py          # Real-time analytics charts and open research dataset downloads
-│   ├── 4_Moderation.py         # Passkey-restricted maintainer review, audit logs & actions
-│   └── 5_About.py              # Mission, NLP significance, and open-source contribution guide
+├── Backend/                    # 🚀 All Backend-Related Code
+│   ├── main.py                 # FastAPI application entrypoint with CORS & lifespan
+│   ├── config.py               # Server settings, database paths & language metadata
+│   ├── database.py             # SQLite database engine, WAL mode, CRUD & search
+│   ├── schemas.py              # Pydantic request and response models
+│   ├── routes/                 # Modular API routers
+│   │   ├── proverbs.py         # Search, filter, pagination, retrieve, submit
+│   │   ├── chat.py             # Multilingual cultural RAG inference
+│   │   ├── analytics.py        # Corpus statistics, distributions & charts
+│   │   ├── moderation.py       # Authentication, pending queue, review & audits
+│   │   └── exports.py          # UTF-8 BOM CSV & JSON dataset stream downloads
+│   └── utils/                  # Backend utilities
+│       ├── chatbot_utils.py    # Grounded RAG search, Ollama & LLM drivers
+│       ├── validation.py       # Form inputs validation & duplicate checking
+│       ├── export_utils.py     # UTF-8 BOM CSV & formatted JSON serialization
+│       ├── moderation_utils.py # Timing-attack resistant passkey verification
+│       ├── language_utils.py   # Script Unicode block detection & text direction
+│       └── windows_patch.py    # Windows asyncio socket disconnect silence handler
 │
-├── components/
-│   ├── __init__.py
-│   ├── navbar.py               # Custom header renderer and CSS injector
-│   ├── sidebar.py              # Brand identity, live counts, language pills & session status
-│   ├── proverb_card.py         # Cultural proverb card with native font and RTL support
-│   └── metric_cards.py         # Live metric KPI summary blocks
-│
-├── utils/
-│   ├── __init__.py
-│   ├── chatbot_utils.py        # RAG retrieval, Gemini/Groq/OpenAI drivers & offline engine
-│   ├── language_utils.py       # Unicode script detection, RTL direction, and label formatting
-│   ├── validation.py           # Form inputs validation, lengths, email check & duplicate check
-│   ├── export_utils.py         # UTF-8 BOM CSV & indented JSON generator with privacy scrubbing
-│   ├── moderation_utils.py     # Timing-attack resistant passkey verification and session management
-│   ├── formatting.py           # Safe HTML escaping, ISO date formatting, and text truncation
-│   └── windows_patch.py        # Windows asyncio socket disconnect silence handler
-│
-├── assets/
-│   └── styles.css              # Custom responsive stylesheet & typography
+├── Frontend/                   # 🌿 All Frontend-Related Code
+│   ├── app.py                  # Streamlit main entrypoint & cultural AI chat interface
+│   ├── config.py               # Frontend configuration & API endpoint settings
+│   ├── api_client.py           # Centralized HTTP client consuming FastAPI REST APIs
+│   ├── assets/
+│   │   └── styles.css          # Dark theme stylesheet & typography protections
+│   ├── components/             # Reusable Streamlit components
+│   │   ├── navbar.py           # Header renderer & CSS injector
+│   │   ├── sidebar.py          # Brand identity, navigation, chat settings & author credit
+│   │   ├── proverb_card.py     # Theme-aware proverb card with native font & RTL support
+│   │   └── metric_cards.py     # KPI metric summary blocks
+│   ├── pages/                  # Streamlit multi-page interface
+│   │   ├── 1_Explore_Proverbs.py # Corpus search, filters & Previous/Next pagination
+│   │   ├── 2_Add_Proverb.py    # Proverb submission form & receipt
+│   │   ├── 3_Dashboard.py      # Real-time analytics charts & open research downloads
+│   │   ├── 4_Moderation.py     # Passkey-restricted maintainer review & actions
+│   │   └── 5_About.py          # Mission, architecture & supported languages
+│   └── utils/                  # Frontend formatting & display utilities
+│       ├── formatting.py       # Safe HTML escaping, ISO date format & text truncation
+│       ├── language_utils.py   # Script display labels & RTL helpers
+│       └── windows_patch.py    # Harmless disconnect suppressor
 │
 ├── data/
-│   └── .gitkeep                # Database directory (auto-creates bhashaverse.db)
+│   └── bhashaverse.db          # Thread-safe SQLite database with Write-Ahead Logging
 │
-└── tests/
-    ├── __init__.py
-    ├── test_chatbot.py         # Chatbot RAG retrieval, keyword parsing & offline engine tests
-    ├── test_database.py        # Database schema, CRUD, Unicode (10 langs), search, cascade tests
-    ├── test_validation.py      # Input constraint and email format tests
-    ├── test_moderation.py      # Passkey timing-attack resistant auth tests
-    └── test_export.py          # CSV UTF-8 BOM, JSON encoding, and privacy sanitization tests
+└── tests/                      # Automated test suite (100% passing)
+    ├── test_backend_api.py     # FastAPI TestClient endpoints verification
+    ├── test_chatbot.py         # Chatbot RAG retrieval & offline engine tests
+    ├── test_database.py        # Database schema, Unicode & CRUD tests
+    ├── test_validation.py      # Input validation & duplicate detection tests
+    ├── test_moderation.py      # Timing-attack resistant auth tests
+    └── test_export.py          # CSV UTF-8 BOM & JSON privacy tests
 ```
 
 ---
@@ -233,11 +248,23 @@ Ensure that all unit tests pass:
 python -m pytest -v
 ```
 
-### Step 6: Launch BhashaVerse
+### Step 6: Launch Bhashaverse
+
+You can run both the **FastAPI REST Backend** and **Streamlit Web Frontend** concurrently using the unified launcher:
+
 ```bash
-streamlit run app.py
+python run.py
 ```
-Open your browser at `http://localhost:8501`. On first launch, the database automatically initializes with authentic seed proverbs across all 10 languages!
+
+- **Interactive API Documentation (Swagger):** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **FastAPI REST API Base:** [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api)
+- **Streamlit Web Platform:** [http://127.0.0.1:8501](http://127.0.0.1:8501)
+
+You can also run them independently if desired:
+```bash
+python run.py backend    # Starts only FastAPI on port 8000
+python run.py frontend   # Starts only Streamlit on port 8501
+```
 
 ---
 

@@ -1,0 +1,3 @@
+"""
+Bhashaverse - Frontend Application Package
+"""
